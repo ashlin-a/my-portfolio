@@ -1,0 +1,17 @@
+services:
+  my-portfolio:
+    container_name: my-portfolio-dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    volumes:
+      # Sync current directory with container for HMR
+      - .:/app
+      # Preserve the container's node_modules (which has the installed deps)
+      # preventing the local host (empty or different OS) node_modules from overriding it
+      - /app/node_modules
+    ports:
+      - "4321:4321"
+    environment:
+      - NODE_ENV=development

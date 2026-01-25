@@ -1,23 +1,89 @@
+---
+import '../styles/global.css';
+import { siteConfig } from '@/config';
+
+interface Props {
+	title?: string;
+    description?: string;
+}
+
+const { 
+    title = siteConfig.site.title, 
+    description = siteConfig.site.description 
+} = Astro.props;
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title}</title>
 	</head>
-	<body>
-		<slot />
+	<body class="bg-black text-neutral-300 selection:bg-emerald-900 selection:text-white antialiased opacity-0">
+        
+        <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:bg-emerald-600 focus:text-black focus:font-mono focus:font-bold">
+            Skip to main content
+        </a>
+
+        <nav aria-label="Main Navigation" class="fixed top-0 w-full z-50 bg-black border-b border-neutral-800">
+            <div class="max-w-7xl mx-auto flex justify-between items-center h-14 px-6 md:px-8">
+                <a href="/" class="font-mono text-sm font-bold tracking-tight text-white" aria-label="{siteConfig.site.name} Home">
+                    <span class="text-emerald-500 mr-2" aria-hidden="true">➜</span>{siteConfig.site.name}
+                </a>
+    
+                <ul class="flex gap-6 md:gap-10 font-mono text-xs uppercase tracking-widest text-neutral-500">
+                    {siteConfig.navigation.main.map((item) => (
+                        <li><a href={item.href} class="hover:text-emerald-400 transition-colors duration-200">{item.name}</a></li>
+                    ))}
+                </ul>
+            </div>
+        </nav>
+
+        <main id="main-content" class="max-w-7xl mx-auto border-l border-r border-neutral-800 min-h-screen mt-14">
+		    <slot />
+        </main>
+
+        <footer role="contentinfo" class="max-w-7xl mx-auto border-t border-neutral-800 py-8 px-6 flex justify-between items-center text-xs text-neutral-600 font-mono">
+            <div>© {new Date().getFullYear()} {siteConfig.site.name}</div>
+            <div>NO_TRACKING_COOKIES</div>
+        </footer>
+
+        <script>
+            import { gsap } from "gsap";
+            import { ScrollTrigger } from "gsap/ScrollTrigger";
+            
+            gsap.registerPlugin(ScrollTrigger);
+
+            const hasVisited = sessionStorage.getItem("hasVisited");
+
+            if (hasVisited) {
+                // Subsequent visits: Show immediately, no navbar stagger
+                gsap.set("body", { opacity: 1 });
+            } else {
+                // First visit: Play intro animations
+                sessionStorage.setItem("hasVisited", "true");
+                
+                // Global Page Fade In
+                gsap.to("body", { opacity: 1, duration: 0.5, ease: "power2.inOut" });
+
+                // Navbar Stagger
+                const navLinks = document.querySelectorAll("nav ul li");
+                gsap.from(navLinks, {
+                    y: -20,
+                    opacity: 0,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: "power3.out",
+                    delay: 0.2
+                });
+            }
+        </script>
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

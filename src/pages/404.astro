@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="404 | Page Not Found">
+    <section class="min-h-[80vh] flex flex-col items-center justify-center text-center px-6 relative overflow-hidden">
+        <!-- Background decorative elements -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+
+        <h1 id="error-code" class="font-mono text-9xl md:text-[12rem] font-bold text-transparent bg-clip-text bg-gradient-to-b from-neutral-200 to-neutral-800 tracking-tighter mb-4 select-none">
+            404
+        </h1>
+
+        <div id="console-output" class="font-mono text-sm md:text-base text-neutral-400 mb-10 text-left bg-neutral-900/50 p-6 border border-neutral-800 rounded-lg shadow-2xl backdrop-blur-sm max-w-md w-full">
+            <p class="text-red-500 mb-2">➜ Error: Object not found</p>
+            <p class="mb-1"><span class="text-emerald-500">user@portfolio:~$</span> ping {Astro.url.pathname}</p>
+            <p class="mb-4">Request timed out.</p>
+            
+            <p class="mb-1"><span class="text-emerald-500">user@portfolio:~$</span> whereis page</p>
+            <p class="mb-4">page: (nowhere)</p>
+
+            <p class="mb-1"><span class="text-emerald-500">user@portfolio:~$</span> cat excuse.txt</p>
+            <p class="italic text-neutral-500">"It works on my machine ¯\_(ツ)_/¯"</p>
+        </div>
+
+        <a href="/" id="home-btn" class="group relative inline-flex items-center justify-center px-8 py-4 bg-emerald-600 text-black font-mono text-sm font-bold uppercase tracking-wider hover:bg-emerald-500 transition-colors">
+            <span>Return to Base</span>
+        </a>
+    </section>
+</Layout>
+
+<script>
+    import { gsap } from "gsap";
+
+    const tl = gsap.timeline();
+
+    tl.from("#error-code", {
+        y: -50,
+        opacity: 0,
+        duration: 1,
+        ease: "bounce.out"
+    })
+    .from("#console-output", {
+        scale: 0.9,
+        opacity: 0,
+        duration: 0.5,
+        ease: "back.out(1.7)"
+    }, "-=0.5")
+    .from("#console-output p", {
+        x: -10,
+        opacity: 0,
+        duration: 0.3,
+        stagger: 0.1,
+        ease: "power2.out"
+    })
+    .from("#home-btn", {
+        y: 20,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out"
+    }, "-=0.2");
+</script>

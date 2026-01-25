@@ -1,0 +1,10 @@
+services:
+  my-portfolio-prod:
+    container_name: my-portfolio-prod
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: prod
+    ports:
+      - "8080:80"
+    restart: always

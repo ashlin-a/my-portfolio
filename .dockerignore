@@ -1,0 +1,9 @@
+node_modules
+dist
+.git
+.gitignore
+.dockerignore
+.DS_Store
+.gemini-memory
+.vscode
+README.md
