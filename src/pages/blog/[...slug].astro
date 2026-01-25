@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
-import PostLayout from '../../components/PostLayout.jsx';
+import PostLayout from '../../components/PostLayout.astro';
 ---
 
 <Layout title={post.data.title}>

@@ -7,7 +7,6 @@ A high-performance, minimalist portfolio website for a Senior Full-Stack Enginee
 This project leverages the following technologies:
 
 - **Core Framework:** [Astro](https://astro.build/) (v5) - For zero-JS-by-default performance and content collections.
-- **UI Library:** [React](https://react.dev/) - Used for interactive islands and complex components.
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/) (v4) - Utility-first styling with a custom dark theme config.
 - **Runtime & Package Manager:** [Bun](https://bun.sh/) - Fast all-in-one JavaScript runtime.
 - **Animations:** [GSAP](https://gsap.com/) - High-performance animations (ScrollTrigger, staggered reveals).
@@ -91,7 +90,7 @@ Access at `http://localhost:8080`.
 ├── docker-compose.prod.yml# Prod container config
 ├── package.json           # Project dependencies
 ├── src/
-│   ├── components/        # React & Astro components
+│   ├── components/        # UI components (Astro)
 │   ├── config/            # Centralized site config (Site Info, Nav)
 │   ├── content/           # Blog posts (Markdown)
 │   ├── layouts/           # Page layouts (Layout.astro)
