@@ -73,7 +73,7 @@ const { hero, profile, stack, projects } = siteConfig.home;
         </div>
 
         <div class="md:col-span-9">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 -mr-[1px] -mb-[1px]">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 -mr-px -mb-px">
                 {stack.map((group) => (
                     <div class="p-6 md:p-10 bg-black h-full border-r border-b border-neutral-800">
                         <h4 class="font-mono text-emerald-500 text-sm font-bold uppercase mb-6">{group.title}</h4>
@@ -104,14 +104,14 @@ const { hero, profile, stack, projects } = siteConfig.home;
                             {project.links ? (
                                 <div class="flex gap-4" aria-label="Project links">
                                     {project.links.map((link, i) => (
-                                        <a href={link.href} class={`font-mono text-xs uppercase px-3 py-1 transition-colors ${i === 0 ? 'text-neutral-400 border border-neutral-700 hover:border-emerald-500 hover:text-emerald-500' : 'text-emerald-500 border border-emerald-500 hover:bg-emerald-500 hover:text-black'}`}>
+                                        <a href={link.href} target="_blank" rel="noopener noreferrer" class={`font-mono text-xs uppercase px-3 py-1 transition-colors ${i === 0 ? 'text-neutral-400 border border-neutral-700 hover:border-emerald-500 hover:text-emerald-500' : 'text-emerald-500 border border-emerald-500 hover:bg-emerald-500 hover:text-black'}`}>
                                             {link.text}
                                         </a>
                                     ))}
                                 </div>
                             ) : (
                                 project.link && (
-                                    <a href={project.link.href} class="font-mono text-xs text-emerald-500 border border-emerald-500 px-3 py-1 hover:bg-emerald-500 hover:text-black transition-colors uppercase">
+                                    <a href={project.link.href} target="_blank" rel="noopener noreferrer" class="font-mono text-xs text-emerald-500 border border-emerald-500 px-3 py-1 hover:bg-emerald-500 hover:text-black transition-colors uppercase">
                                         {project.link.text}
                                     </a>
                                 )
@@ -183,9 +183,9 @@ const { hero, profile, stack, projects } = siteConfig.home;
             </a>
             
             <nav aria-label="Social Media Links" class="flex justify-center gap-8 font-mono text-xs text-neutral-500 uppercase tracking-widest">
-                <a href={siteConfig.site.social.github} class="hover:text-white transition-colors">GitHub</a>
-                <a href={siteConfig.site.social.linkedin} class="hover:text-white transition-colors">LinkedIn</a>
-                <a href={siteConfig.site.social.twitter} class="hover:text-white transition-colors">Twitter</a>
+                <a href={siteConfig.site.social.github} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">GitHub</a>
+                <a href={siteConfig.site.social.linkedin} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>
+                <a href={siteConfig.site.social.twitter} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Twitter</a>
             </nav>
         </div>
     </section>

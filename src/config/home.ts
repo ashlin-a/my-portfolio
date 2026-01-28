@@ -127,7 +127,7 @@ export const homeConfig: HomeConfig = {
     {
       title: "Personal Portfolio",
       link: { text: "View Code", href: "https://github.com/ashlin-a/portfolio" },
-      description: "Old Portfolio Website with Server Side Rendering",
+      description: "My Old Portfolio Website with Server Side Rendering",
       tags: ["[ Next.js ]", "[ TailwindCSS ]", "[ Resend ]", "[ Cloudflare Workers ]"],
     },
   ],
