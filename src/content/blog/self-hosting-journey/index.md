@@ -1,7 +1,7 @@
 ---
 title: "Self Hosting Journey"
 pubDate: 2025-09-05
-description: "This is my first blog that I have written on self hosting"
+description: "How I run my own cloud services on my home server and take back control of my data."
 ---
 > Disclaimer: This post is not a how-to guide. I'll share my experience and my setup so that you can get an idea of what can be done. I’ve added links to the services I mention, in case you want to read more about them.
 

@@ -1,4 +1,4 @@
-# Dev Portfolio_
+# Portfolio_
 
 A high-performance, minimalist portfolio website for a Senior Full-Stack Engineer. Built with a focus on clean architecture, type safety, and zero bloat. This project uses a modern tech stack to deliver a fast, accessible, and visually engaging experience.
 

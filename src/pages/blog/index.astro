@@ -2,13 +2,31 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const posts = await getCollection('blog');
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<Layout title="Blog | Dev Portfolio_">
+<Layout title="Writing | Ashlin Portfolio_">
+    <!-- Header Section -->
+    <section class="pt-32 pb-16 px-6 md:px-16 border-b border-neutral-800">
+        <div class="max-w-4xl">
+            <p class="header-animate font-mono text-emerald-500 text-sm mb-4 tracking-widest uppercase">
+                // Index
+            </p>
+            
+            <h1 class="header-animate text-5xl md:text-7xl font-semibold text-white tracking-tighter mb-8">
+                Writing<span class="text-emerald-500">_</span>
+            </h1>
+            
+            <p class="header-animate text-lg text-neutral-400 max-w-2xl leading-relaxed">
+            My personal knowledge base. I write about what I’m building, what broke along the way, and how I fixed it.</p>
+        </div>
+    </section>
+
+    <!-- Content Section -->
     <section class="grid md:grid-cols-12 border-b border-neutral-800">
         <div class="md:col-span-3 py-12 px-6 md:px-8 border-b md:border-b-0 md:border-r border-neutral-800 bg-neutral-900/20">
-            <h2 class="font-mono text-xs text-neutral-500 uppercase tracking-widest sticky top-24">04 — Blog</h2>
+            <h2 class="font-mono text-xs text-neutral-500 uppercase tracking-widest sticky top-24">All Posts</h2>
         </div>
 
         <div class="md:col-span-9">
@@ -47,3 +65,36 @@ const posts = await getCollection('blog');
         </div>
     </section>
 </Layout>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Header Animation
+    gsap.from(".header-animate", {
+        y: 20,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        delay: 0.2
+    });
+
+    // Blog Cards Animation
+    const cards = document.querySelectorAll(".blog-card");
+    cards.forEach((card) => {
+        gsap.from(card, {
+            scrollTrigger: {
+                trigger: card,
+                start: "top 90%",
+                toggleActions: "play none none reverse"
+            },
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out"
+        });
+    });
+</script>

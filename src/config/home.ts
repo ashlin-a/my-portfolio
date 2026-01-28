@@ -23,7 +23,7 @@ interface HomeConfig {
   profile: {
     heading: string;
     content: string[];
-    stats: { value: string; label: string }[];
+    stats?: { value: string; label: string }[];
   };
   stack: {
     title: string;
@@ -34,9 +34,9 @@ interface HomeConfig {
 
 export const homeConfig: HomeConfig = {
   hero: {
-    label: "// Full-Stack Engineer",
-    headline: `Robust systems.<br>Clean architecture.<br>Zero bloat`,
-    description: "I build accessible, high-performance web applications. Focused on scalability, type safety, and efficient user interfaces without the visual noise.",
+    label: "// Hello, I'm Ashlin",
+    headline: `Glad you're here.<br>Have a look<br>around`,
+    description: "This is where I document my experiments and projects. I love open-source tools, clean systems, and seeing how things work under the hood.",
     primaryBtn: {
       text: "View Projects",
       href: "#projects",
@@ -47,69 +47,89 @@ export const homeConfig: HomeConfig = {
     },
   },
   profile: {
-    heading: "Engineering over hype.",
+    heading: "How I work.",
     content: [
-      "I approach web development with a pragmatic mindset. While I appreciate modern trends, I prioritize stability, maintainability, and core web vitals.",
-      "With 6+ years of experience in the field, I have moved from tweaking CSS to architecting distributed systems. I believe that good code is boring code—it works predictably, handles errors gracefully, and is easy for the next developer to read.",
+    "I believe the best way to learn is by doing, which is why I don’t stop at localhost. I’m a graduate who loves the entire stack - from designing responsive UIs in React to managing the Linux servers that host them.",
+    "My home lab is my testing ground. It’s where I experiment with Docker, configure reverse proxies, and learn the hard lessons about deployment and uptime. I’m ready to bring that full-lifecycle understanding to a professional team."
     ],
-    stats: [
-      { value: "6+", label: "Years Exp" },
-      { value: "50+", label: "Projects" },
-      { value: "100%", label: "Uptime" },
-    ],
+    // stats: [
+    //   { value: "6+", label: "Years Exp" },
+    //   { value: "50+", label: "Projects" },
+    //   { value: "100%", label: "Uptime" },
+    // ],
   },
-  stack: [
+ stack: [
     {
-      title: "Frontend_Core",
+      title: "Languages",
+      items: [
+        "JavaScript / TypeScript",
+        "Python",
+        "Java",
+        "C Lang",
+      ],
+    },
+    {
+      title: "Frontend",
       items: [
         "React / Next.js",
-        "TypeScript",
-        "Tailwind CSS",
-        "HTML5 / Semantic",
-        "HTML5 / Semantic",
-        "HTML5 / Semantic",
+        "Astro",
+        "Hugo",
+        "HTML / CSS",
+        "Tailwind / Bootstrap",
       ],
     },
     {
-      title: "Backend_Sys",
+      title: "Backend",
       items: [
-        "Node.js",
-        "PostgreSQL",
-        "Redis",
-        "Go (Golang)",
+        "Node.js (Express / Hono)",
+        "Flask",
+        "PostgreSQL / MySQL",
+        "MongoDB / Mongoose",
+        "Prisma ORM",
+        "WebRTC",
       ],
     },
     {
-      title: "DevOps_Tools",
+      title: "DevOps_Cloud",
       items: [
-        "Docker",
-        "AWS / Vercel",
-        "CI/CD Pipelines",
+        "Docker / Kubernetes",
+        "Cloudflare (Workers / Pages)",
         "Linux / Bash",
+        "CI/CD Pipelines",
+      ],
+    },
+    {
+      title: "Testing_QA",
+      items: [
+        "Vitest / Jest",
+        "Cypress",
+        "Playwright", // Optional: If you use it, otherwise remove
       ],
     },
   ],
+
   projects: [
     {
-      title: "Inventory Logistics API",
-      link: { text: "View Code", href: "#" },
-      description: "A high-throughput inventory management system designed for warehousing. Features real-time tracking, automated reordering, and role-based access control.",
-      tags: ["[ Node.js ]", "[ PostgreSQL ]", "[ Redis ]", "[ Docker ]"],
+      title: "TSCF Records App",
+      link: { text: "View Code", href: "https://github.com/ashlin-a/TSCF-Sign-In-App" },
+      description: "I made an app for The Second Chance Foundation, Non Profit Organization. Aim of the project was to digitize the manual form filling process for their clients.",
+      tags: ["[ React ]", "[ TailwindCSS ]", "[ Express ]", "[ MongoDB ]", "[ Docker ]"]
     },
     {
-      title: "Minimalist Finance Dashboard",
+      title: "Hugo Portfolio",
       links: [
-        { text: "Demo", href: "#" },
-        { text: "Code", href: "#" },
+        { text: "Live", href: "https://ashley-abraham.com" },
+        // { text: "Code", href: "#" },
       ],
-      description: "A client-side data visualization tool for tracking cryptocurrency assets. Focuses on performance, localized number formatting, and dark mode aesthetics.",
-      tags: ["[ React ]", "[ D3.js ]", "[ Tailwind ]", "[ WebSocket ]"],
+      description: "Made this content driven static portfolio website for Ashley Abraham, who is working as a Graphic Designer.",
+      tags: ["[ Hugo ]", "[ TailwindCSS ]", "[ CI/CD ]", "[ Cloudflare Workers ]"],
     },
     {
-      title: "CLI Tool for Documentation",
-      link: { text: "View Code", href: "#" },
-      description: "An open-source command-line interface that generates static documentation sites from Markdown files. Zero config required.",
-      tags: ["[ Rust ]", "[ Clap ]", "[ Markdown ]"],
+      title: "Personal Portfolio",
+      link: { text: "View Code", href: "https://github.com/ashlin-a/portfolio" },
+      description: "Old Portfolio Website with Server Side Rendering",
+      tags: ["[ Next.js ]", "[ TailwindCSS ]", "[ Resend ]", "[ Cloudflare Workers ]"],
     },
   ],
 };
+ 
