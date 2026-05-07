@@ -2,7 +2,7 @@
 
 A high-performance, minimalist portfolio website for a Senior Full-Stack Engineer. Built with a focus on clean architecture, type safety, and zero bloat. This project uses a modern tech stack to deliver a fast, accessible, and visually engaging experience.
 
-## ⚡️ Tech Stack
+## Tech Stack
 
 This project leverages the following technologies:
 
@@ -13,7 +13,7 @@ This project leverages the following technologies:
 - **Type Safety:** [TypeScript](https://www.typescriptlang.org/) - Strict type checking across the entire codebase.
 - **Containerization:** [Docker](https://www.docker.com/) - Multi-stage builds for development and production (Nginx).
 
-## ✨ Features
+## Features
 
 - **Minimalist Dark Theme:** Custom "Inter" and "JetBrains Mono" typography with a terminal-inspired aesthetic.
 - **High Performance:** Static Site Generation (SSG) with Astro for optimal loading speeds.
@@ -26,7 +26,7 @@ This project leverages the following technologies:
 - **Responsive Design:** Fully fluid layout that adapts to mobile, tablet, and desktop screens.
 - **Configurable:** Centralized configuration (`src/config/`) for site metadata and navigation.
 
-## 🛠️ Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -61,7 +61,7 @@ docker compose up --build
 ```
 Access at `http://localhost:4321`.
 
-## 📦 Production
+## Production
 
 ### Build Locally
 
@@ -80,7 +80,7 @@ docker compose -f docker-compose.prod.yml up --build
 ```
 Access at `http://localhost:8080`.
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 /
@@ -99,6 +99,6 @@ Access at `http://localhost:8080`.
 └── tsconfig.json          # TypeScript configuration
 ```
 
-## 📄 License
+## License
 
 MIT
