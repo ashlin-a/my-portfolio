@@ -110,6 +110,12 @@ export const homeConfig: HomeConfig = {
 
   projects: [
     {
+      title: "ByteBay",
+      link: { text: "View Code", href: "https://github.com/ashlin-a/byte-bay" },
+      description: "Full-stack cloud storage app (Google Drive-style). Upload, organize, and share files via a React SPA backed by a REST API. Files stored in S3-compatible object storage via presigned URLs — API never proxies bytes. Includes folder trees, shared links with expiry and download limits, and a full audit event log.",
+      tags: ["[ React ]", "[ TypeScript ]", "[ Express ]", "[ PostgreSQL ]", "[ Drizzle ORM ]", "[ Better Auth ]", "[ AWS S3 ]", "[ Docker ]", "[ Turborepo ]", "[ TailwindCSS ]"]
+    },
+    {
       title: "TSCF Records App",
       link: { text: "View Code", href: "https://github.com/ashlin-a/TSCF-Sign-In-App" },
       description: "I made an app for The Second Chance Foundation, Non Profit Organization. Aim of the project was to digitize the manual form filling process for their clients.",
