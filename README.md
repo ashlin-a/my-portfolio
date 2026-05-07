@@ -100,5 +100,5 @@ Access at `http://localhost:8080`.
 ```
 
 ## License
-
-MIT
+- **Code** (components, layouts, pages, config): [MIT](LICENSE)
+- **Blog content** (`/src/content/`): © 2026 ashlin-a — [All Rights Reserved](LICENSE)
