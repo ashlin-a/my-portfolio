@@ -3,6 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "prepare": "lefthook install",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
@@ -28,6 +29,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "eslint": "^10.4.0",
     "eslint-plugin-astro": "^1.7.0",
+    "lefthook": "^2.1.8",
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.8.0",
