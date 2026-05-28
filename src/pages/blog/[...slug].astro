@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map(post => ({
+  return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },
   }));
@@ -16,7 +16,7 @@ import PostLayout from '../../components/PostLayout.astro';
 ---
 
 <Layout title={post.data.title}>
-    <PostLayout title={post.data.title}>
-        <Content />
-    </PostLayout>
+  <PostLayout title={post.data.title}>
+    <Content />
+  </PostLayout>
 </Layout>

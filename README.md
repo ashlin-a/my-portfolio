@@ -1,4 +1,4 @@
-# Portfolio_
+# Portfolio\_
 
 A high-performance, minimalist portfolio website for a Senior Full-Stack Engineer. Built with a focus on clean architecture, type safety, and zero bloat. This project uses a modern tech stack to deliver a fast, accessible, and visually engaging experience.
 
@@ -18,10 +18,10 @@ This project leverages the following technologies:
 - **Minimalist Dark Theme:** Custom "Inter" and "JetBrains Mono" typography with a terminal-inspired aesthetic.
 - **High Performance:** Static Site Generation (SSG) with Astro for optimal loading speeds.
 - **Interactive Animations:**
-    - Smooth page fade-ins.
-    - Staggered hero text reveals.
-    - Scroll-triggered section reveals.
-    - Staggered list items and cards.
+  - Smooth page fade-ins.
+  - Staggered hero text reveals.
+  - Scroll-triggered section reveals.
+  - Staggered list items and cards.
 - **Content Management:** Markdown-based blog using Astro Content Collections with `@tailwindcss/typography` styling.
 - **Responsive Design:** Fully fluid layout that adapts to mobile, tablet, and desktop screens.
 - **Configurable:** Centralized configuration (`src/config/`) for site metadata and navigation.
@@ -36,12 +36,14 @@ This project leverages the following technologies:
 ### Local Development
 
 1.  **Clone the repository:**
+
     ```bash
     git clone https://github.com/yourusername/my-portfolio.git
     cd my-portfolio
     ```
 
 2.  **Install dependencies:**
+
     ```bash
     bun install
     ```
@@ -59,6 +61,7 @@ Run the project in a container with Hot Module Replacement (HMR) enabled:
 ```bash
 docker compose up --build
 ```
+
 Access at `http://localhost:4321`.
 
 ## Production
@@ -78,6 +81,7 @@ Build and serve the optimized static site using Nginx:
 ```bash
 docker compose -f docker-compose.prod.yml up --build
 ```
+
 Access at `http://localhost:8080`.
 
 ## Project Structure
@@ -100,5 +104,6 @@ Access at `http://localhost:8080`.
 ```
 
 ## License
+
 - **Code** (components, layouts, pages, config): [MIT](LICENSE)
 - **Blog content** (`/src/content/`): © 2026 ashlin-a — [All Rights Reserved](LICENSE)

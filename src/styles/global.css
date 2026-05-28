@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@plugin "@tailwindcss/typography";
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
 
 @theme {
   --font-sans: 'Inter', sans-serif;
@@ -8,29 +8,34 @@
 
 /* Cursor Blink Animation for Hero */
 .cursor-blink {
-    animation: blink 1.2s step-end infinite;
+  animation: blink 1.2s step-end infinite;
 }
 
 @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 /* Custom Scrollbar for Webkit */
 ::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-    background: #000; 
+  background: #000;
 }
 ::-webkit-scrollbar-thumb {
-    background: #262626; 
+  background: #262626;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #10b981; 
+  background: #10b981;
 }
 
 body {
-    background-color: black;
-    color: #d4d4d4; /* neutral-300 */
+  background-color: black;
+  color: #d4d4d4; /* neutral-300 */
 }

@@ -12,6 +12,6 @@ services:
       # preventing the local host (empty or different OS) node_modules from overriding it
       - /app/node_modules
     ports:
-      - "4321:4321"
+      - '4321:4321'
     environment:
       - NODE_ENV=development

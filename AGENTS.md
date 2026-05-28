@@ -16,6 +16,7 @@ Guidance for AI coding agents (Claude Code, Codex, Cursor, Aider, etc.) working 
 ## Architecture
 
 **Astro 5 SSG + Cloudflare Workers adapter** ([astro.config.mjs](astro.config.mjs)). Build emits both static `dist/` assets and `dist/_worker.js`. [wrangler.jsonc](wrangler.jsonc) binds `./dist` as `ASSETS` and points `main` at the worker entry. Two deploy paths coexist:
+
 - Cloudflare Workers via `bun run deploy`
 - Static Nginx via `docker-compose.prod.yml` — ignores the worker, serves `dist/` directly.
 
