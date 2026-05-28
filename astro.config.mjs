@@ -11,6 +11,9 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      exclude: ['wrangler'],
+    },
   },
 
   adapter: cloudflare(),
