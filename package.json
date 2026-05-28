@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "prepare": "lefthook install",
+    "prepare": "[ -d .git ] && lefthook install || echo 'skipping lefthook (no .git)'",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
@@ -27,6 +27,7 @@
     "@astrojs/check": "^0.9.9",
     "@eslint/js": "^10.0.1",
     "@tailwindcss/typography": "^0.5.19",
+    "@types/node": "^25.9.1",
     "eslint": "^10.4.0",
     "eslint-plugin-astro": "^1.7.0",
     "lefthook": "^2.1.8",

@@ -20,6 +20,14 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.dev.vars
+.dev.vars.*
+
+# typescript
+*.tsbuildinfo
+
+# lefthook local overrides
+.lefthook-local.yml
 
 # macOS-specific files
 .DS_Store

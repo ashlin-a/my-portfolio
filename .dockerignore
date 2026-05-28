@@ -1,9 +1,16 @@
 node_modules
 dist
+.astro
+.wrangler
 .git
 .gitignore
 .dockerignore
 .DS_Store
 .gemini-memory
 .vscode
+.env
+.env.*
+.dev.vars
+.dev.vars.*
+lefthook.yml
 README.md
