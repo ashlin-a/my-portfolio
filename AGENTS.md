@@ -32,7 +32,7 @@ Guidance for AI coding agents (Claude Code, Codex, Cursor, Aider, etc.) working 
 
 **Layouts**: single [Layout.astro](src/layouts/Layout.astro) wraps everything — nav + mobile menu + footer + GSAP page-in. Posts additionally wrap in [PostLayout.astro](src/components/PostLayout.astro), which applies `prose prose-invert prose-emerald` typography.
 
-**GSAP animations**: registered with `ScrollTrigger`. First-visit intro is gated by `sessionStorage.hasVisited` in [Layout.astro](src/layouts/Layout.astro) — subsequent navigations skip body fade-in and navbar stagger. Page-level animations (hero stagger, section reveals, project/blog card reveals, stack list stagger) live in the inline `<script>` of [src/pages/index.astro](src/pages/index.astro), keyed off classes `.hero-text`, `.gsap-section`, `.stagger-list`, `.project-card`, `.blog-card`.
+**GSAP animations**: registered with `ScrollTrigger`. First-visit intro is gated by `sessionStorage.hasVisited` in [Layout.astro](src/layouts/Layout.astro) — subsequent navigations skip body fade-in and navbar stagger. Page-level animations (hero stagger, section reveals, project/blog card reveals, stack list stagger) live in the inline `<script>` of [src/pages/index.astro](src/pages/index.astro), keyed off classes `.hero-text`, `.gsap-section`, `.stagger-list`, `.project-card`, `.blog-card`. All ScrollTrigger reveal animations use `once: true` — elements stay visible after triggering, never reverse on scroll-up.
 
 **Styling**: Tailwind v4 via `@tailwindcss/vite` plugin (no `tailwind.config.js`). Theme tokens declared inline in CSS via `@theme` in [src/styles/global.css](src/styles/global.css). Fonts (`Inter`, `JetBrains Mono`) loaded from Google Fonts in [Layout.astro](src/layouts/Layout.astro). Typography plugin enabled via `@plugin "@tailwindcss/typography"`. Dark aesthetic hardcoded: black bg, emerald-500 accent, neutral grays. Canonical v4 class names (`bg-linear-to-b`, not `bg-gradient-to-b`) — `prettier-plugin-tailwindcss` sorts.
 
@@ -49,6 +49,6 @@ Guidance for AI coding agents (Claude Code, Codex, Cursor, Aider, etc.) working 
 ## Conventions
 
 - Mobile menu state, burger animation, and first-visit fade live entirely in one inline `<script>` in [Layout.astro](src/layouts/Layout.astro) — bundled by Astro, not loaded separately.
-- Adding a blog post: create `src/content/blog/<slug>/index.md` with frontmatter `{ title, pubDate, description }`. Slug is the folder name (via `post.id`). Static paths regenerate on build.
+- Adding a blog post: create `src/content/blog/<slug>/index.md` with frontmatter `{ title, pubDate, description }`. Slug is the folder name (via `post.id`). Static paths regenerate on build. Code blocks are highlighted via Shiki (`github-dark` theme) with `@shikijs/transformers` — available notation: `// [!code ++]`/`// [!code --]` (diff), `// [!code highlight]` (highlight line), `// [!code focus]` (blur others). Each block gets a language label and hover-reveal copy button automatically.
 - Project entries support either a single `link` or a multi `links` array — index page branches on whichever is set ([src/pages/index.astro](src/pages/index.astro)).
 - License split: code is MIT, blog content under `src/content/` is © reserved ([README.md](README.md)).
