@@ -310,7 +310,7 @@ const { hero, profile, stack, projects } = siteConfig.home;
       scrollTrigger: {
         trigger: section,
         start: 'top 80%', // When top of section hits 80% of viewport
-        toggleActions: 'play none none reverse',
+        once: true,
       },
       y: 50,
       opacity: 0,
