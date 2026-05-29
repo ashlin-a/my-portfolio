@@ -16,7 +16,6 @@
     "typecheck": "astro check"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^13.6.0",
     "@shikijs/transformers": "^4.1.0",
     "@tailwindcss/vite": "^4.3.0",
     "astro": "^6.4.1",

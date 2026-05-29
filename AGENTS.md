@@ -6,9 +6,9 @@ Guidance for AI coding agents (Claude Code, Codex, Cursor, Aider, etc.) working 
 
 - `bun install` — install deps (Docker uses `--frozen-lockfile`). `prepare` script runs `lefthook install` when `.git` exists, no-ops otherwise (so containers don't fail).
 - `bun run dev` — Astro dev server on port 4321
-- `bun run build` — static build to `./dist` (Cloudflare adapter also emits `dist/_worker.js` unless `STATIC_ONLY=1`)
+- `bun run build` — static build to `./dist`
 - `bun run preview` — preview built site
-- `bun run deploy` — `astro build && wrangler deploy` to Cloudflare Workers
+- `bun run deploy` — `astro build && wrangler deploy` ships `dist/` as a Cloudflare static-assets Worker
 - `bun run lint` / `bun run lint:fix` — ESLint flat config
 - `bun run format` / `bun run format:check` — Prettier (`prettier-plugin-astro`, `prettier-plugin-tailwindcss`)
 - `bun run typecheck` — `astro check` (also runs in `pre-push`)
@@ -17,14 +17,12 @@ Guidance for AI coding agents (Claude Code, Codex, Cursor, Aider, etc.) working 
 
 ## Architecture
 
-**Astro 6 SSG + Cloudflare Workers adapter** ([astro.config.mjs](astro.config.mjs)). Build emits both static `dist/` assets and `dist/_worker.js`. Adapter 13 auto-manages `wrangler.jsonc` (`main`/`assets` are injected at build time — do not hand-author them). Two deploy paths coexist:
+**Astro 6 SSG, no adapter** ([astro.config.mjs](astro.config.mjs)). Pure static build to `dist/` — no worker, no SSR. Two deploy paths share the same output:
 
-- Cloudflare Workers via `bun run deploy`
-- Static Nginx via `docker-compose.prod.yml` — ignores the worker, serves `dist/` directly.
+- Cloudflare static-assets Worker via `bun run deploy` — [wrangler.jsonc](wrangler.jsonc) hand-authored with `assets.directory: ./dist` and no `main`. `wrangler deploy` uploads `dist/` as static assets.
+- Static Nginx via `docker-compose.prod.yml` — serves `dist/` directly.
 
-**`STATIC_ONLY=1` env gate** ([astro.config.mjs](astro.config.mjs)): drops the Cloudflare adapter so the build emits pure static `dist/` without booting `workerd`. Set in the Docker builder stage because `@cloudflare/vite-plugin` opens a WebSocket and Bun's incomplete `ws.WebSocket.upgrade` impl hangs the container forever. Host `bun run deploy` leaves it unset.
-
-**Session driver no-op** ([astro.config.mjs](astro.config.mjs)): `@astrojs/cloudflare` v13 always injects a `SESSION` KV binding unless `session.driver` is pre-configured — this triggers wrangler auto-provisioning on every deploy, which fails once the namespace already exists (CF error 10014). The config sets `session: { driver: sessionDrivers.lruCache() }` to suppress this. Do not remove it — the site does not use sessions, so there is no runtime impact, but removing it will break Cloudflare CI deploys.
+The `@astrojs/cloudflare` adapter was removed: it forces a _runtime_ image service (markdown images become `/_image?href=…` URLs), but a static site emits no worker to serve `/_image`, so images 404 everywhere. The adapter also auto-injected `SESSION` KV and `IMAGES` bindings that needed workarounds. With no adapter, Astro's default **sharp** image service optimizes images at build into `/_astro/*.webp` referenced by direct URL — works identically in `wrangler dev`, `bun run preview`, prod, and the Nginx path. Do not re-add the adapter unless the site needs SSR/edge functions.
 
 **Path alias**: `@/*` → `src/*` ([tsconfig.json](tsconfig.json), `paths` only — no `baseUrl`, TS 5+ resolves relative to tsconfig). Use `@/config` etc., not relative imports across `src/`.
 

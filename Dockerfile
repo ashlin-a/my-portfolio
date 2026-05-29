@@ -19,15 +19,11 @@ CMD ["bun", "run", "dev", "--host"]
 # Produces ./dist for the Nginx prod stage.
 FROM deps AS builder
 ENV NODE_ENV=production
-# Skip Cloudflare adapter — Nginx serves the static dist/; the worker is
-# only used by `bun run deploy` on the host. Avoids @cloudflare/vite-plugin
-# booting workerd, which hangs under Bun.
-ENV STATIC_ONLY=1
 COPY . .
 RUN bun run build
 
 # ─── prod ──────────────────────────────────────────────────────────────────
-# Static-only Nginx serve. Worker (_worker.js) is ignored on this path.
+# Static Nginx serve of dist/.
 FROM nginx:alpine AS prod
 COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 80
