@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, sessionDrivers } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
@@ -18,6 +18,13 @@ const staticOnly = process.env.STATIC_ONLY === '1';
 // https://astro.build/config
 export default defineConfig({
   integrations: [],
+
+  // Prevent @astrojs/cloudflare adapter from auto-injecting a SESSION KV
+  // binding and triggering wrangler auto-provisioning on every deploy.
+  // This site does not use sessions; lruCache is an in-memory no-op.
+  session: {
+    driver: sessionDrivers.lruCache(),
+  },
 
   markdown: {
     shikiConfig: {

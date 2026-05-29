@@ -24,6 +24,8 @@ Guidance for AI coding agents (Claude Code, Codex, Cursor, Aider, etc.) working 
 
 **`STATIC_ONLY=1` env gate** ([astro.config.mjs](astro.config.mjs)): drops the Cloudflare adapter so the build emits pure static `dist/` without booting `workerd`. Set in the Docker builder stage because `@cloudflare/vite-plugin` opens a WebSocket and Bun's incomplete `ws.WebSocket.upgrade` impl hangs the container forever. Host `bun run deploy` leaves it unset.
 
+**Session driver no-op** ([astro.config.mjs](astro.config.mjs)): `@astrojs/cloudflare` v13 always injects a `SESSION` KV binding unless `session.driver` is pre-configured — this triggers wrangler auto-provisioning on every deploy, which fails once the namespace already exists (CF error 10014). The config sets `session: { driver: sessionDrivers.lruCache() }` to suppress this. Do not remove it — the site does not use sessions, so there is no runtime impact, but removing it will break Cloudflare CI deploys.
+
 **Path alias**: `@/*` → `src/*` ([tsconfig.json](tsconfig.json), `paths` only — no `baseUrl`, TS 5+ resolves relative to tsconfig). Use `@/config` etc., not relative imports across `src/`.
 
 **Central config funnel**: [src/config/index.ts](src/config/index.ts) re-exports `siteConfig` composed of [site.ts](src/config/site.ts), [navigation.ts](src/config/navigation.ts), [home.ts](src/config/home.ts). All page content (hero, profile, stack, projects, social links) is data-driven from here — edit config, not JSX. `homeConfig` is typed via a local `HomeConfig` interface in [home.ts](src/config/home.ts).
