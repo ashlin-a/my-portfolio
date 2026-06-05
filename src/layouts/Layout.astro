@@ -1,21 +1,24 @@
 ---
 import '../styles/global.css';
 import { siteConfig } from '@/config';
+import Seo from '@/components/Seo.astro';
 
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  ogType?: 'website' | 'article';
+  article?: { publishedTime: Date; modifiedTime?: Date };
 }
 
-const { title = siteConfig.site.title, description = siteConfig.site.description } = Astro.props;
+const { title, description, image, ogType, article } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,7 +27,7 @@ const { title = siteConfig.site.title, description = siteConfig.site.description
       rel="stylesheet"
     />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <Seo title={title} description={description} image={image} ogType={ogType} article={article} />
   </head>
   <body
     class="overflow-x-hidden bg-black text-neutral-300 antialiased opacity-0 selection:bg-emerald-900 selection:text-white"

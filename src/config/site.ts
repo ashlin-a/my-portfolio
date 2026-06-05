@@ -1,12 +1,19 @@
 export const siteInfo = {
   name: 'ASHLIN_DEV',
+  url: 'https://ashlin.dev',
+  // `<title>` on the home page; other pages render `${pageTitle} | ${author}`.
+  titleDefault: 'Ashlin Asokan — Full-Stack Web Developer',
+  titleTemplate: '%s | Ashlin Asokan',
   title: 'Ashlin Portfolio_',
-  description: 'Web Developer Portfolio',
+  description:
+    'Ashlin Asokan — full-stack web developer. Projects, homelab experiments, and writing on self-hosting, Docker, and the modern JavaScript stack.',
   author: 'Ashlin Asokan',
-  email: 'hello@ashlin.dev',
+  jobTitle: 'Full-Stack Web Developer',
+  email: 'mail@ashlin.dev',
+  twitterHandle: '@simple_ashlin',
   social: {
     github: 'https://github.com/ashlin-a/',
     linkedin: 'https://www.linkedin.com/in/ashlinasokan',
-    twitter: 'https://twitter.com',
+    twitter: 'https://x.com/simple_ashlin',
   },
 } as const;

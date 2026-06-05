@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
+import sitemap from '@astrojs/sitemap';
 
 import {
   transformerNotationDiff,
@@ -11,7 +12,13 @@ import {
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [],
+  site: 'https://ashlin.dev',
+
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/404') && !page.includes('/og/'),
+    }),
+  ],
 
   markdown: {
     shikiConfig: {

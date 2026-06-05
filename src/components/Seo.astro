@@ -1,0 +1,110 @@
+---
+import { siteConfig } from '@/config';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** OG image path (relative to site root) or absolute URL. Defaults to /og-default.png */
+  image?: string;
+  ogType?: 'website' | 'article';
+  article?: { publishedTime: Date; modifiedTime?: Date };
+}
+
+const { title, description, image, ogType = 'website', article } = Astro.props;
+
+const site = siteConfig.site;
+const siteUrl = Astro.site ?? new URL(site.url);
+
+// Title: home uses the default; inner pages get the brand template applied.
+const pageTitle = title ? site.titleTemplate.replace('%s', title) : site.titleDefault;
+const metaDescription = description ?? site.description;
+
+const canonical = new URL(Astro.url.pathname, siteUrl);
+const ogImage = new URL(image ?? '/og/default.png', siteUrl);
+
+const isHome = Astro.url.pathname === '/';
+
+// --- JSON-LD ---
+const schemas: Record<string, unknown>[] = [];
+
+if (isHome) {
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: site.titleDefault,
+    url: siteUrl.href,
+    description: site.description,
+  });
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: site.author,
+    url: siteUrl.href,
+    jobTitle: site.jobTitle,
+    email: `mailto:${site.email}`,
+    sameAs: [site.social.github, site.social.linkedin, site.social.twitter],
+  });
+}
+
+if (ogType === 'article' && article) {
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description: metaDescription,
+    image: ogImage.href,
+    datePublished: article.publishedTime.toISOString(),
+    dateModified: (article.modifiedTime ?? article.publishedTime).toISOString(),
+    author: {
+      '@type': 'Person',
+      name: site.author,
+      url: siteUrl.href,
+    },
+    publisher: {
+      '@type': 'Person',
+      name: site.author,
+      url: siteUrl.href,
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': canonical.href },
+  });
+}
+---
+
+<title>{pageTitle}</title>
+<meta name="description" content={metaDescription} />
+<link rel="canonical" href={canonical.href} />
+
+<!-- Open Graph -->
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonical.href} />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={metaDescription} />
+<meta property="og:site_name" content={site.author} />
+<meta property="og:image" content={ogImage.href} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+{
+  ogType === 'article' && article && (
+    <>
+      <meta property="article:published_time" content={article.publishedTime.toISOString()} />
+      {article.modifiedTime && (
+        <meta property="article:modified_time" content={article.modifiedTime.toISOString()} />
+      )}
+    </>
+  )
+}
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content={site.twitterHandle} />
+<meta name="twitter:creator" content={site.twitterHandle} />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={metaDescription} />
+<meta name="twitter:image" content={ogImage.href} />
+
+<!-- Structured data -->
+{
+  schemas.map((schema) => (
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+  ))
+}
