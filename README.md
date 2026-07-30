@@ -1,4 +1,4 @@
-# Portfolio\_
+# Portfolio
 
 A high-performance, editorial portfolio website for a full-stack engineer — large serif display type, generous whitespace, an asymmetric grid, and hairline rules on a warm paper/ink palette. Built with a focus on clean architecture, type safety, and zero bloat.
 
@@ -25,7 +25,7 @@ This project leverages the following technologies:
   - Full `prefers-reduced-motion` support.
 - **Content Management:** Markdown-based blog using Astro Content Collections with `@tailwindcss/typography` styling.
 - **Responsive Design:** Fully fluid layout that adapts to mobile, tablet, and desktop screens.
-- **Configurable:** Centralized configuration (`src/config/`) for site metadata and navigation.
+- **Configurable:** Centralized configuration (`src/config/`) for site metadata, navigation, and every page section — hero, profile, stack, projects, and contact are edited as data, not markup.
 
 ## Getting Started
 
@@ -99,7 +99,7 @@ Access at `http://localhost:8080`.
 │   ├── config/            # Centralized site config (Site Info, Nav)
 │   ├── content/           # Blog posts (Markdown)
 │   ├── layouts/           # Page layouts (Layout.astro)
-│   ├── pages/             # Route definitions (index.astro, blog/, posts/)
+│   ├── pages/             # Route definitions (index.astro, 404.astro, blog/, og/)
 │   └── styles/            # Global CSS & Tailwind config
 └── tsconfig.json          # TypeScript configuration
 ```
