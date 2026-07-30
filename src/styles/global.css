@@ -176,12 +176,21 @@ html {
 
 /* ── Mobile menu (native popover, no JS for open/close) ────── */
 
+/* A popover renders in the top layer, which paints above every z-index — a
+   full-bleed `inset: 0` would cover the fixed nav and bury the toggle that
+   closes it. Start below the nav (h-14 = 3.5rem) so the burger→X stays
+   visible and clickable. `width`/`height: auto` are needed to beat the UA's
+   `fit-content` sizing now that the inset does the sizing. */
 #mobile-menu {
   position: fixed;
-  inset: 0;
-  width: 100%;
+  inset: 3.5rem 0 0 0;
+  width: auto;
   max-width: none;
-  height: 100%;
+  /* Second declaration wins where `dvh` is supported and gives the menu a
+     definite height, so the list's `h-full` centring resolves; the first is
+     the fallback if it isn't. */
+  height: auto;
+  height: calc(100dvh - 3.5rem);
   max-height: none;
   margin: 0;
   padding: 0;

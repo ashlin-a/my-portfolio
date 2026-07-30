@@ -140,10 +140,22 @@ const { title, description, image, ogType, article } = Astro.props;
 
     <script>
       // The popover handles open/close, Escape and light-dismiss on its own.
-      // Same-page anchors (`/#about`) don't dismiss it, so close it manually.
+      // Two cases it can't: same-page anchors (`/#about`) don't dismiss it,
+      // and crossing to the desktop breakpoint (phone rotated to landscape)
+      // hides the burger, which would leave no way to close the overlay.
       const menu = document.getElementById('mobile-menu');
+
+      // hidePopover() throws if the popover isn't currently showing.
+      const close = () => {
+        if (menu?.matches(':popover-open')) menu.hidePopover();
+      };
+
       menu?.querySelectorAll('a').forEach((link) => {
-        link.addEventListener('click', () => menu.hidePopover());
+        link.addEventListener('click', close);
+      });
+
+      matchMedia('(min-width: 48rem)').addEventListener('change', (e) => {
+        if (e.matches) close();
       });
     </script>
   </body>
