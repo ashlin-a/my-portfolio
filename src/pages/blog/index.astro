@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import PostRow from '@/components/PostRow.astro';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog')).sort(
@@ -11,100 +12,52 @@ const posts = (await getCollection('blog')).sort(
   title="Writing"
   description="Articles on self-hosting, homelab, Docker, and web development by Ashlin Asokan."
 >
-  <!-- Header Section -->
-  <section class="border-line border-b px-6 pt-32 pb-16 md:px-16">
-    <div class="max-w-4xl">
-      <p class="header-animate text-accent mb-4 font-mono text-sm tracking-widest uppercase">
-        // Index
-      </p>
+  <!-- Header -->
+  <section class="mx-auto max-w-6xl px-6 pt-32 pb-20 md:px-10 md:pt-40 md:pb-24 lg:px-16">
+    <p class="enter text-muted font-mono text-xs tracking-[0.14em] uppercase" style="--i:0">
+      Index
+    </p>
 
-      <h1 class="header-animate text-ink mb-8 text-5xl font-semibold tracking-tighter md:text-7xl">
-        Writing<span class="text-accent">_</span>
-      </h1>
+    <h1 class="enter text-ink text-display mt-8 font-serif" style="--i:1">Writing</h1>
 
-      <p class="header-animate text-ink-soft max-w-2xl text-lg leading-relaxed">
-        My personal knowledge base. I write about what I’m building, what broke along the way, and
-        how I fixed it.
-      </p>
-    </div>
+    <p
+      class="enter text-ink-soft mt-10 max-w-[42ch] text-xl leading-relaxed md:text-2xl"
+      style="--i:2"
+    >
+      My personal knowledge base. I write about what I’m building, what broke along the way, and how
+      I fixed it.
+    </p>
   </section>
 
-  <!-- Content Section -->
-  <section class="border-line grid border-b md:grid-cols-12">
+  <!-- Posts -->
+  <section aria-label="All posts" class="border-line border-t">
     <div
-      class="border-line bg-surface border-b px-6 py-12 md:col-span-3 md:border-r md:border-b-0 md:px-8"
+      class="mx-auto grid max-w-6xl gap-y-10 px-6 py-20 md:grid-cols-12 md:gap-x-10 md:px-10 md:py-24 lg:px-16"
     >
-      <h2 class="text-muted sticky top-24 font-mono text-xs tracking-widest uppercase">
-        All Posts
-      </h2>
-    </div>
+      <div class="md:col-span-3">
+        <h2 class="text-muted font-mono text-xs tracking-[0.14em] uppercase md:sticky md:top-24">
+          All posts
+        </h2>
+      </div>
 
-    <div class="md:col-span-9">
-      <ul class="flex flex-col">
+      <div class="md:col-span-9 md:col-start-4">
         {
-          posts.map((post) => (
-            <li class="blog-card group border-line hover:bg-surface-hover border-b transition-colors duration-150">
-              <article class="flex flex-col gap-6 p-6 md:p-10">
-                <div class="flex items-start justify-between">
-                  <h3 class="text-ink group-hover:text-accent-hover text-2xl font-medium transition-colors">
-                    <a href={`/blog/${post.id}`}>{post.data.title}</a>
-                  </h3>
-                  <a
-                    href={`/blog/${post.id}`}
-                    class="border-accent text-accent hover:bg-accent hover:text-on-accent border px-3 py-1 font-mono text-xs uppercase transition-colors"
-                    aria-label={`Read ${post.data.title}`}
-                  >
-                    Read Post
-                  </a>
-                </div>
-                {post.data.description && (
-                  <p class="text-ink-soft max-w-2xl">{post.data.description}</p>
-                )}
-                <div class="text-muted flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs tracking-wider uppercase">
-                  <time datetime={new Date(post.data.pubDate || Date.now()).toISOString()}>
-                    [ {new Date(post.data.pubDate || Date.now()).toLocaleDateString()} ]
-                  </time>
-                </div>
-              </article>
-            </li>
-          ))
+          posts.length > 0 ? (
+            <ul>
+              {posts.map((post) => (
+                <PostRow
+                  href={`/blog/${post.id}`}
+                  title={post.data.title}
+                  description={post.data.description}
+                  pubDate={post.data.pubDate}
+                />
+              ))}
+            </ul>
+          ) : (
+            <p class="text-muted text-lg">No posts yet.</p>
+          )
         }
-      </ul>
-
-      {posts.length === 0 && <div class="text-muted p-12 font-mono">// No posts found.</div>}
+      </div>
     </div>
   </section>
 </Layout>
-
-<script>
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  // Header Animation
-  gsap.from('.header-animate', {
-    y: 20,
-    opacity: 0,
-    duration: 0.8,
-    stagger: 0.15,
-    ease: 'power3.out',
-    delay: 0.2,
-  });
-
-  // Blog Cards Animation
-  const cards = document.querySelectorAll('.blog-card');
-  cards.forEach((card) => {
-    gsap.from(card, {
-      scrollTrigger: {
-        trigger: card,
-        start: 'top 90%',
-        toggleActions: 'play none none reverse',
-      },
-      y: 30,
-      opacity: 0,
-      duration: 0.8,
-      ease: 'power2.out',
-    });
-  });
-</script>

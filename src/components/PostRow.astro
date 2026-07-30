@@ -1,0 +1,45 @@
+---
+// One row treatment for the writing list, shared by the home page and the
+// blog index so the two can't drift apart again.
+interface Props {
+  href: string;
+  title: string;
+  description?: string;
+  pubDate: Date;
+}
+
+const { href, title, description, pubDate } = Astro.props;
+
+const dateLabel = pubDate.toLocaleDateString('en-GB', {
+  day: '2-digit',
+  month: 'short',
+  year: 'numeric',
+});
+---
+
+<li class="reveal border-line hover:border-line-strong group relative border-t transition-colors">
+  <article class="grid gap-y-4 py-10 md:grid-cols-12 md:gap-x-10 md:py-12">
+    <div class="md:col-span-3">
+      <time
+        datetime={pubDate.toISOString()}
+        class="text-muted font-mono text-xs tracking-[0.14em] uppercase"
+      >
+        {dateLabel}
+      </time>
+    </div>
+
+    <div class="md:col-span-9">
+      <h3
+        class="text-ink group-hover:text-accent font-serif text-3xl transition-colors md:text-4xl"
+      >
+        <!-- Stretched link: the whole row is the hit target. -->
+        <a href={href} class="before:absolute before:inset-0 before:content-['']">{title}</a>
+      </h3>
+      {
+        description && (
+          <p class="text-ink-soft mt-4 max-w-[62ch] text-lg leading-[1.7]">{description}</p>
+        )
+      }
+    </div>
+  </article>
+</li>

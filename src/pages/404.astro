@@ -4,86 +4,34 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="404 — Page Not Found">
   <section
-    class="relative flex min-h-[80vh] flex-col items-center justify-center overflow-hidden px-6 text-center"
+    class="mx-auto flex min-h-[80vh] max-w-6xl flex-col justify-center px-6 md:px-10 lg:px-16"
   >
-    <!-- Background decorative elements -->
-    <div
-      class="bg-accent/10 dark:bg-accent/5 pointer-events-none absolute top-1/2 left-1/2 -z-10 h-125 w-125 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
-    >
-    </div>
+    <p class="enter text-muted font-mono text-xs tracking-[0.14em] uppercase" style="--i:0">
+      Error 404
+    </p>
 
-    <!-- Gradient stops reverse between modes (bright-to-dark vs dark-to-bright),
-         so this is a `dark:` escape hatch rather than a token swap. -->
-    <h1
-      id="error-code"
-      class="mb-4 bg-linear-to-b from-neutral-800 to-neutral-200 bg-clip-text font-mono text-9xl font-bold tracking-tighter text-transparent select-none md:text-[12rem] dark:from-neutral-200 dark:to-neutral-800"
-    >
-      404
-    </h1>
+    <p class="enter text-line-strong text-display mt-8 font-serif select-none" style="--i:1">404</p>
 
-    <div
-      id="console-output"
-      class="border-line bg-surface text-ink-soft mb-10 w-full max-w-md rounded-lg border p-6 text-left font-mono text-sm shadow-2xl backdrop-blur-sm md:text-base"
-    >
-      <p class="mb-2 text-red-500">➜ Error: Object not found</p>
-      <p class="mb-1">
-        <span class="text-accent">user@portfolio:~$</span> ping {Astro.url.pathname}
+    <div class="enter border-line mt-8 border-t pt-8" style="--i:2">
+      <p class="text-ink max-w-[38ch] font-serif text-3xl md:text-4xl">This page doesn’t exist.</p>
+      <p class="text-ink-soft mt-6 max-w-[52ch] text-lg leading-[1.7]">
+        The address may be mistyped, or the page has moved since you last saw it.
       </p>
-      <p class="mb-4">Request timed out.</p>
 
-      <p class="mb-1"><span class="text-accent">user@portfolio:~$</span> whereis page</p>
-      <p class="mb-4">page: (nowhere)</p>
-
-      <p class="mb-1"><span class="text-accent">user@portfolio:~$</span> cat excuse.txt</p>
-      <p class="text-muted italic">"It works on my machine ¯\_(ツ)_/¯"</p>
+      <div class="mt-10 flex flex-wrap gap-x-8 gap-y-3">
+        <a
+          href="/"
+          class="text-accent hover:text-accent-hover decoration-line-strong hover:decoration-accent text-sm font-medium underline decoration-1 underline-offset-[6px] transition-colors"
+        >
+          Back to home
+        </a>
+        <a
+          href="/blog"
+          class="text-accent hover:text-accent-hover decoration-line-strong hover:decoration-accent text-sm font-medium underline decoration-1 underline-offset-[6px] transition-colors"
+        >
+          Read the writing
+        </a>
+      </div>
     </div>
-
-    <a
-      href="/"
-      id="home-btn"
-      class="bg-accent-fill text-on-accent hover:bg-accent-fill-hover group relative inline-flex items-center justify-center px-8 py-4 font-mono text-sm font-bold tracking-wider uppercase transition-colors"
-    >
-      <span>Return to Base</span>
-    </a>
   </section>
 </Layout>
-
-<script>
-  import { gsap } from 'gsap';
-
-  const tl = gsap.timeline();
-
-  tl.from('#error-code', {
-    y: -50,
-    opacity: 0,
-    duration: 1,
-    ease: 'bounce.out',
-  })
-    .from(
-      '#console-output',
-      {
-        scale: 0.9,
-        opacity: 0,
-        duration: 0.5,
-        ease: 'back.out(1.7)',
-      },
-      '-=0.5'
-    )
-    .from('#console-output p', {
-      x: -10,
-      opacity: 0,
-      duration: 0.3,
-      stagger: 0.1,
-      ease: 'power2.out',
-    })
-    .from(
-      '#home-btn',
-      {
-        y: 20,
-        opacity: 0,
-        duration: 0.5,
-        ease: 'power2.out',
-      },
-      '-=0.2'
-    );
-</script>

@@ -14,7 +14,8 @@ interface Project {
 interface HomeConfig {
   hero: {
     label: string;
-    headline: string;
+    /** One entry per rendered line — keeps line breaks out of the markup. */
+    headline: string[];
     description: string;
     primaryBtn: Link;
     secondaryBtn: Link;
@@ -22,27 +23,31 @@ interface HomeConfig {
   profile: {
     heading: string;
     content: string[];
-    stats?: { value: string; label: string }[];
   };
   stack: {
     title: string;
     items: string[];
   }[];
   projects: Project[];
+  contact: {
+    label: string;
+    heading: string;
+    description: string;
+  };
 }
 
 export const homeConfig: HomeConfig = {
   hero: {
-    label: "// Hello, I'm Ashlin",
-    headline: `Glad you're here.<br>Have a look<br>around`,
+    label: "Hello, I'm Ashlin",
+    headline: ["Glad you're here.", 'Have a look around'],
     description:
       'This is where I document my experiments and projects. I love open-source tools, clean systems, and seeing how things work under the hood.',
     primaryBtn: {
-      text: 'View Projects',
+      text: 'View projects',
       href: '#projects',
     },
     secondaryBtn: {
-      text: 'Contact Me',
+      text: 'Get in touch',
       href: '#contact',
     },
   },
@@ -52,11 +57,6 @@ export const homeConfig: HomeConfig = {
       'I believe the best way to learn is by doing, which is why I don’t stop at localhost. I’m a graduate who loves the entire stack - from designing responsive UIs in React to managing the Linux servers that host them.',
       'My home lab is my testing ground. It’s where I experiment with Docker, configure reverse proxies, and learn the hard lessons about deployment and uptime. I’m ready to bring that full-lifecycle understanding to a professional team.',
     ],
-    // stats: [
-    //   { value: "6+", label: "Years Exp" },
-    //   { value: "50+", label: "Projects" },
-    //   { value: "100%", label: "Uptime" },
-    // ],
   },
   stack: [
     {
@@ -79,7 +79,7 @@ export const homeConfig: HomeConfig = {
       ],
     },
     {
-      title: 'DevOps_Cloud',
+      title: 'DevOps & Cloud',
       items: [
         'Docker / Kubernetes',
         'Cloudflare (Workers / Pages)',
@@ -88,40 +88,36 @@ export const homeConfig: HomeConfig = {
       ],
     },
     {
-      title: 'Testing_QA',
-      items: [
-        'Vitest / Jest',
-        'Cypress',
-        'Playwright', // Optional: If you use it, otherwise remove
-      ],
+      title: 'Testing & QA',
+      items: ['Vitest / Jest', 'Cypress', 'Playwright'],
     },
   ],
 
   projects: [
     {
       title: 'ByteBay',
-      link: { text: 'View Code', href: 'https://github.com/ashlin-a/byte-bay' },
+      link: { text: 'View code', href: 'https://github.com/ashlin-a/byte-bay' },
       description:
         'Full-stack cloud storage app (Google Drive-style). Upload, organize, and share files via a React SPA backed by a REST API. Files stored in S3-compatible object storage via presigned URLs — API never proxies bytes. Includes folder trees, shared links with expiry and download limits, and a full audit event log.',
       tags: [
-        '[ React ]',
-        '[ TypeScript ]',
-        '[ Express ]',
-        '[ PostgreSQL ]',
-        '[ Drizzle ORM ]',
-        '[ Better Auth ]',
-        '[ AWS S3 ]',
-        '[ Docker ]',
-        '[ Turborepo ]',
-        '[ TailwindCSS ]',
+        'React',
+        'TypeScript',
+        'Express',
+        'PostgreSQL',
+        'Drizzle ORM',
+        'Better Auth',
+        'AWS S3',
+        'Docker',
+        'Turborepo',
+        'TailwindCSS',
       ],
     },
     {
       title: 'TSCF Records App',
-      link: { text: 'View Code', href: 'https://github.com/ashlin-a/TSCF-Sign-In-App' },
+      link: { text: 'View code', href: 'https://github.com/ashlin-a/TSCF-Sign-In-App' },
       description:
         'I made an app for The Second Chance Foundation, Non Profit Organization. Aim of the project was to digitize the manual form filling process for their clients.',
-      tags: ['[ React ]', '[ TailwindCSS ]', '[ Express ]', '[ MongoDB ]', '[ Docker ]'],
+      tags: ['React', 'TailwindCSS', 'Express', 'MongoDB', 'Docker'],
     },
     {
       title: 'Hugo Portfolio',
@@ -131,13 +127,20 @@ export const homeConfig: HomeConfig = {
       ],
       description:
         'Made this content driven static portfolio website for Ashley Abraham, who is working as a Graphic Designer.',
-      tags: ['[ Hugo ]', '[ TailwindCSS ]', '[ CI/CD ]', '[ Cloudflare Workers ]'],
+      tags: ['Hugo', 'TailwindCSS', 'CI/CD', 'Cloudflare Workers'],
     },
     {
       title: 'Personal Portfolio',
-      link: { text: 'View Code', href: 'https://github.com/ashlin-a/portfolio' },
+      link: { text: 'View code', href: 'https://github.com/ashlin-a/portfolio' },
       description: 'My Old Portfolio Website with Server Side Rendering',
-      tags: ['[ Next.js ]', '[ TailwindCSS ]', '[ Resend ]', '[ Cloudflare Workers ]'],
+      tags: ['Next.js', 'TailwindCSS', 'Resend', 'Cloudflare Workers'],
     },
   ],
+
+  contact: {
+    label: 'Contact',
+    heading: 'Ready to collaborate?',
+    description:
+      'Currently open for freelance contracts and full-time opportunities. If you need clean code and solid architecture, let’s talk.',
+  },
 };
