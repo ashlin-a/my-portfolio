@@ -6,8 +6,8 @@ A high-performance, minimalist portfolio website for a Senior Full-Stack Enginee
 
 This project leverages the following technologies:
 
-- **Core Framework:** [Astro](https://astro.build/) (v5) - For zero-JS-by-default performance and content collections.
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/) (v4) - Utility-first styling with a custom dark theme config.
+- **Core Framework:** [Astro](https://astro.build/) (v6) - For zero-JS-by-default performance and content collections.
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/) (v4) - Utility-first styling on a semantic token palette that drives both light and dark themes.
 - **Runtime & Package Manager:** [Bun](https://bun.sh/) - Fast all-in-one JavaScript runtime.
 - **Animations:** [GSAP](https://gsap.com/) - High-performance animations (ScrollTrigger, staggered reveals).
 - **Type Safety:** [TypeScript](https://www.typescriptlang.org/) - Strict type checking across the entire codebase.
@@ -15,7 +15,7 @@ This project leverages the following technologies:
 
 ## Features
 
-- **Minimalist Dark Theme:** Custom "Inter" and "JetBrains Mono" typography with a terminal-inspired aesthetic.
+- **Light & Dark Themes:** Custom "Inter" and "JetBrains Mono" typography with a terminal-inspired aesthetic. Follows the OS preference by default; a navbar toggle overrides it, persisted in `localStorage` and applied before first paint so there is no flash.
 - **High Performance:** Static Site Generation (SSG) with Astro for optimal loading speeds.
 - **Interactive Animations:**
   - Smooth page fade-ins.
