@@ -22,7 +22,11 @@ export default defineConfig({
 
   markdown: {
     shikiConfig: {
-      theme: 'github-dark',
+      // Dual theme: `defaultColor: false` emits --shiki-light/--shiki-dark
+      // custom properties per token instead of a baked color, so the theme
+      // switch is handled entirely in global.css.
+      themes: { light: 'github-light', dark: 'github-dark' },
+      defaultColor: false,
       transformers: [
         transformerNotationDiff(),
         transformerNotationHighlight(),

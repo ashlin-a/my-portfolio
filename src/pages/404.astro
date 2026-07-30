@@ -8,38 +8,40 @@ import Layout from '../layouts/Layout.astro';
   >
     <!-- Background decorative elements -->
     <div
-      class="pointer-events-none absolute top-1/2 left-1/2 -z-10 h-125 w-125 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/5 blur-3xl"
+      class="bg-accent/10 dark:bg-accent/5 pointer-events-none absolute top-1/2 left-1/2 -z-10 h-125 w-125 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
     >
     </div>
 
+    <!-- Gradient stops reverse between modes (bright-to-dark vs dark-to-bright),
+         so this is a `dark:` escape hatch rather than a token swap. -->
     <h1
       id="error-code"
-      class="mb-4 bg-linear-to-b from-neutral-200 to-neutral-800 bg-clip-text font-mono text-9xl font-bold tracking-tighter text-transparent select-none md:text-[12rem]"
+      class="mb-4 bg-linear-to-b from-neutral-800 to-neutral-200 bg-clip-text font-mono text-9xl font-bold tracking-tighter text-transparent select-none md:text-[12rem] dark:from-neutral-200 dark:to-neutral-800"
     >
       404
     </h1>
 
     <div
       id="console-output"
-      class="mb-10 w-full max-w-md rounded-lg border border-neutral-800 bg-neutral-900/50 p-6 text-left font-mono text-sm text-neutral-400 shadow-2xl backdrop-blur-sm md:text-base"
+      class="border-line bg-surface text-ink-soft mb-10 w-full max-w-md rounded-lg border p-6 text-left font-mono text-sm shadow-2xl backdrop-blur-sm md:text-base"
     >
       <p class="mb-2 text-red-500">➜ Error: Object not found</p>
       <p class="mb-1">
-        <span class="text-emerald-500">user@portfolio:~$</span> ping {Astro.url.pathname}
+        <span class="text-accent">user@portfolio:~$</span> ping {Astro.url.pathname}
       </p>
       <p class="mb-4">Request timed out.</p>
 
-      <p class="mb-1"><span class="text-emerald-500">user@portfolio:~$</span> whereis page</p>
+      <p class="mb-1"><span class="text-accent">user@portfolio:~$</span> whereis page</p>
       <p class="mb-4">page: (nowhere)</p>
 
-      <p class="mb-1"><span class="text-emerald-500">user@portfolio:~$</span> cat excuse.txt</p>
-      <p class="text-neutral-500 italic">"It works on my machine ¯\_(ツ)_/¯"</p>
+      <p class="mb-1"><span class="text-accent">user@portfolio:~$</span> cat excuse.txt</p>
+      <p class="text-muted italic">"It works on my machine ¯\_(ツ)_/¯"</p>
     </div>
 
     <a
       href="/"
       id="home-btn"
-      class="group relative inline-flex items-center justify-center bg-emerald-600 px-8 py-4 font-mono text-sm font-bold tracking-wider text-black uppercase transition-colors hover:bg-emerald-500"
+      class="bg-accent-fill text-on-accent hover:bg-accent-fill-hover group relative inline-flex items-center justify-center px-8 py-4 font-mono text-sm font-bold tracking-wider uppercase transition-colors"
     >
       <span>Return to Base</span>
     </a>

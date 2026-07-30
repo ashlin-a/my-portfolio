@@ -1,0 +1,79 @@
+---
+// Theme toggle. The `.dark` class on <html> is set before paint by the inline
+// script in Layout.astro; this only handles clicks and OS-preference changes.
+// Icons show the mode you would switch *to* — swapped in CSS, so no flash.
+---
+
+<button
+  id="theme-toggle"
+  type="button"
+  aria-label="Toggle color theme"
+  aria-pressed="false"
+  class="border-line text-muted hover:border-accent hover:text-accent relative z-50 flex h-8 w-8 items-center justify-center rounded-sm border transition-colors"
+>
+  <svg
+    class="h-4 w-4 dark:hidden"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+  </svg>
+  <svg
+    class="hidden h-4 w-4 dark:block"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="4"></circle>
+    <path
+      d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+    ></path>
+  </svg>
+</button>
+
+<script>
+  const btn = document.getElementById('theme-toggle');
+  const root = document.documentElement;
+  const meta = document.querySelector('meta[name="theme-color"]');
+
+  function readStored() {
+    try {
+      return localStorage.getItem('theme');
+    } catch {
+      return null;
+    }
+  }
+
+  function apply(dark: boolean, persist: boolean) {
+    root.classList.toggle('dark', dark);
+    meta?.setAttribute('content', dark ? '#000000' : '#ffffff');
+    btn?.setAttribute('aria-pressed', String(dark));
+
+    if (persist) {
+      try {
+        localStorage.setItem('theme', dark ? 'dark' : 'light');
+      } catch {
+        /* storage unavailable (private mode) — theme still applies for this page */
+      }
+    }
+  }
+
+  // Sync aria-pressed with whatever the inline head script already decided.
+  apply(root.classList.contains('dark'), false);
+
+  btn?.addEventListener('click', () => apply(!root.classList.contains('dark'), true));
+
+  // Keep following the OS until the user has made an explicit choice.
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!readStored()) apply(e.matches, false);
+  });
+</script>

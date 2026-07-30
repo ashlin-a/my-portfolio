@@ -22,6 +22,9 @@
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  // Tailwind v4 at-rules (@theme, @plugin, @custom-variant) are unknown to the
+  // built-in CSS language service.
+  "css.lint.unknownAtRules": "ignore",
   "eslint.useFlatConfig": true,
   "eslint.validate": ["javascript", "typescript", "astro"]
 }

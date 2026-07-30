@@ -12,40 +12,40 @@ const { hero, profile, stack, projects } = siteConfig.home;
 
 <Layout>
   <section
-    class="relative flex min-h-[85vh] flex-col justify-center border-b border-neutral-800 px-6 md:px-16"
+    class="border-line relative flex min-h-[85vh] flex-col justify-center border-b px-6 md:px-16"
   >
     <div class="max-w-4xl">
-      <p class="hero-text mb-4 font-mono text-sm tracking-widest text-emerald-500 uppercase">
+      <p class="hero-text text-accent mb-4 font-mono text-sm tracking-widest uppercase">
         {hero.label}
       </p>
 
       <h1
-        class="hero-text mb-8 text-5xl leading-[1.1] font-semibold tracking-tighter text-white md:text-7xl lg:text-8xl"
+        class="hero-text text-ink mb-8 text-5xl leading-[1.1] font-semibold tracking-tighter md:text-7xl lg:text-8xl"
       >
-        <span set:html={hero.headline} /><span class="cursor-blink text-emerald-500">_</span>
+        <span set:html={hero.headline} /><span class="cursor-blink text-accent">_</span>
       </h1>
 
-      <p class="hero-text mb-12 max-w-2xl text-lg leading-relaxed text-neutral-400">
+      <p class="hero-text text-ink-soft mb-12 max-w-2xl text-lg leading-relaxed">
         {hero.description}
       </p>
 
       <div class="hero-text flex w-full flex-col gap-0 sm:w-auto sm:flex-row sm:gap-6">
         <a
           href={hero.primaryBtn.href}
-          class="group relative inline-flex items-center justify-center bg-emerald-600 px-8 py-4 font-mono text-sm font-bold tracking-wider text-black uppercase transition-colors hover:bg-emerald-500"
+          class="bg-accent-fill text-on-accent hover:bg-accent-fill-hover group relative inline-flex items-center justify-center px-8 py-4 font-mono text-sm font-bold tracking-wider uppercase transition-colors"
         >
           {hero.primaryBtn.text}
         </a>
         <a
           href={hero.secondaryBtn.href}
-          class="group inline-flex items-center justify-center border border-neutral-700 bg-black px-8 py-4 font-mono text-sm font-bold tracking-wider text-white uppercase transition-colors hover:border-emerald-500 hover:text-emerald-500"
+          class="group border-line-strong bg-canvas text-ink hover:border-accent hover:text-accent inline-flex items-center justify-center border px-8 py-4 font-mono text-sm font-bold tracking-wider uppercase transition-colors"
         >
           {hero.secondaryBtn.text}
         </a>
       </div>
     </div>
 
-    <div class="absolute right-8 bottom-8 hidden font-mono text-xs text-neutral-600 md:block">
+    <div class="text-faint absolute right-8 bottom-8 hidden font-mono text-xs md:block">
       SCROLL_DOWN [↓]
     </div>
   </section>
@@ -53,30 +53,30 @@ const { hero, profile, stack, projects } = siteConfig.home;
   <section
     id="about"
     aria-label="About Me"
-    class="gsap-section grid scroll-mt-10 border-b border-neutral-800 md:grid-cols-12"
+    class="gsap-section border-line grid scroll-mt-10 border-b md:grid-cols-12"
   >
     <div
-      class="border-b border-neutral-800 bg-neutral-900/20 px-6 py-12 md:col-span-3 md:border-r md:border-b-0 md:px-8"
+      class="border-line bg-surface border-b px-6 py-12 md:col-span-3 md:border-r md:border-b-0 md:px-8"
     >
-      <h2 class="sticky top-24 font-mono text-xs tracking-widest text-neutral-500 uppercase">
+      <h2 class="text-muted sticky top-24 font-mono text-xs tracking-widest uppercase">
         01 — Profile
       </h2>
     </div>
 
     <div class="px-6 py-20 md:col-span-9 md:px-16">
-      <h3 class="mb-8 text-3xl font-medium text-white">{profile.heading}</h3>
-      <div class="space-y-6 text-lg leading-relaxed text-neutral-400">
+      <h3 class="text-ink mb-8 text-3xl font-medium">{profile.heading}</h3>
+      <div class="text-ink-soft space-y-6 text-lg leading-relaxed">
         {profile.content.map((paragraph) => <p>{paragraph}</p>)}
       </div>
 
       {
         profile.stats && (
-          <dl class="mt-12 grid grid-cols-2 gap-8 border-t border-neutral-800 pt-12 md:grid-cols-4">
+          <dl class="border-line mt-12 grid grid-cols-2 gap-8 border-t pt-12 md:grid-cols-4">
             {profile.stats.map((stat) => (
               <div>
                 <dt class="sr-only">Statistic Value</dt>
-                <dd class="mb-1 block text-3xl font-bold text-white">{stat.value}</dd>
-                <dt class="font-mono text-xs text-neutral-500 uppercase">{stat.label}</dt>
+                <dd class="text-ink mb-1 block text-3xl font-bold">{stat.value}</dd>
+                <dt class="text-muted font-mono text-xs uppercase">{stat.label}</dt>
               </div>
             ))}
           </dl>
@@ -88,12 +88,12 @@ const { hero, profile, stack, projects } = siteConfig.home;
   <section
     id="skills"
     aria-label="Tech Stack"
-    class="gsap-section grid scroll-mt-10 border-b border-neutral-800 md:grid-cols-12"
+    class="gsap-section border-line grid scroll-mt-10 border-b md:grid-cols-12"
   >
     <div
-      class="border-b border-neutral-800 bg-neutral-900/20 px-6 py-12 md:col-span-3 md:border-r md:border-b-0 md:px-8"
+      class="border-line bg-surface border-b px-6 py-12 md:col-span-3 md:border-r md:border-b-0 md:px-8"
     >
-      <h2 class="sticky top-24 font-mono text-xs tracking-widest text-neutral-500 uppercase">
+      <h2 class="text-muted sticky top-24 font-mono text-xs tracking-widest uppercase">
         02 — Stack
       </h2>
     </div>
@@ -102,14 +102,12 @@ const { hero, profile, stack, projects } = siteConfig.home;
       <div class="-mr-px -mb-px grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {
           stack.map((group) => (
-            <div class="h-full border-r border-b border-neutral-800 bg-black p-6 md:p-10">
-              <h4 class="mb-6 font-mono text-sm font-bold text-emerald-500 uppercase">
-                {group.title}
-              </h4>
-              <ul class="stagger-list space-y-3 font-mono text-sm text-neutral-400">
+            <div class="border-line bg-canvas h-full border-r border-b p-6 md:p-10">
+              <h4 class="text-accent mb-6 font-mono text-sm font-bold uppercase">{group.title}</h4>
+              <ul class="stagger-list text-ink-soft space-y-3 font-mono text-sm">
                 {group.items.map((item) => (
                   <li class="flex items-center">
-                    <span class="mr-3 h-1.5 w-1.5 bg-neutral-700" aria-hidden="true" />
+                    <span class="bg-line-strong mr-3 h-1.5 w-1.5" aria-hidden="true" />
                     {item}
                   </li>
                 ))}
@@ -124,12 +122,12 @@ const { hero, profile, stack, projects } = siteConfig.home;
   <section
     id="projects"
     aria-label="Selected Projects"
-    class="gsap-section grid scroll-mt-10 border-b border-neutral-800 md:grid-cols-12"
+    class="gsap-section border-line grid scroll-mt-10 border-b md:grid-cols-12"
   >
     <div
-      class="border-b border-neutral-800 bg-neutral-900/20 px-6 py-12 md:col-span-3 md:border-r md:border-b-0 md:px-8"
+      class="border-line bg-surface border-b px-6 py-12 md:col-span-3 md:border-r md:border-b-0 md:px-8"
     >
-      <h2 class="sticky top-24 font-mono text-xs tracking-widest text-neutral-500 uppercase">
+      <h2 class="text-muted sticky top-24 font-mono text-xs tracking-widest uppercase">
         03 — Projects
       </h2>
     </div>
@@ -137,10 +135,10 @@ const { hero, profile, stack, projects } = siteConfig.home;
     <div class="md:col-span-9">
       {
         projects.map((project) => (
-          <article class="project-card group border-b border-neutral-800 transition-colors duration-150 hover:bg-neutral-900/30">
+          <article class="project-card group border-line hover:bg-surface-hover border-b transition-colors duration-150">
             <div class="flex flex-col gap-6 p-6 md:p-10">
               <div class="flex items-start justify-between">
-                <h3 class="text-2xl font-medium text-white transition-colors group-hover:text-emerald-400">
+                <h3 class="text-ink group-hover:text-accent-hover text-2xl font-medium transition-colors">
                   {project.title}
                 </h3>
                 {project.links ? (
@@ -150,7 +148,7 @@ const { hero, profile, stack, projects } = siteConfig.home;
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class={`px-3 py-1 font-mono text-xs uppercase transition-colors ${i === 0 ? 'border border-neutral-700 text-neutral-400 hover:border-emerald-500 hover:text-emerald-500' : 'border border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-black'}`}
+                        class={`px-3 py-1 font-mono text-xs uppercase transition-colors ${i === 0 ? 'border-line-strong text-ink-soft hover:border-accent hover:text-accent border' : 'border-accent text-accent hover:bg-accent hover:text-on-accent border'}`}
                       >
                         {link.text}
                       </a>
@@ -162,16 +160,16 @@ const { hero, profile, stack, projects } = siteConfig.home;
                       href={project.link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="border border-emerald-500 px-3 py-1 font-mono text-xs text-emerald-500 uppercase transition-colors hover:bg-emerald-500 hover:text-black"
+                      class="border-accent text-accent hover:bg-accent hover:text-on-accent border px-3 py-1 font-mono text-xs uppercase transition-colors"
                     >
                       {project.link.text}
                     </a>
                   )
                 )}
               </div>
-              <p class="max-w-2xl text-neutral-400">{project.description}</p>
+              <p class="text-ink-soft max-w-2xl">{project.description}</p>
               <div
-                class="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs tracking-wider text-neutral-500 uppercase"
+                class="text-muted flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs tracking-wider uppercase"
                 aria-label="Technologies used"
               >
                 {project.tags.map((tag) => (
@@ -188,12 +186,12 @@ const { hero, profile, stack, projects } = siteConfig.home;
   <section
     id="blog"
     aria-label="Recent Writing"
-    class="gsap-section grid scroll-mt-10 border-b border-neutral-800 md:grid-cols-12"
+    class="gsap-section border-line grid scroll-mt-10 border-b md:grid-cols-12"
   >
     <div
-      class="border-b border-neutral-800 bg-neutral-900/20 px-6 py-12 md:col-span-3 md:border-r md:border-b-0 md:px-8"
+      class="border-line bg-surface border-b px-6 py-12 md:col-span-3 md:border-r md:border-b-0 md:px-8"
     >
-      <h2 class="sticky top-24 font-mono text-xs tracking-widest text-neutral-500 uppercase">
+      <h2 class="text-muted sticky top-24 font-mono text-xs tracking-widest uppercase">
         04 — Writing
       </h2>
     </div>
@@ -201,23 +199,23 @@ const { hero, profile, stack, projects } = siteConfig.home;
     <div class="md:col-span-9">
       {
         recentPosts.map((post) => (
-          <article class="blog-card group border-b border-neutral-800 transition-colors duration-150 hover:bg-neutral-900/30">
+          <article class="blog-card group border-line hover:bg-surface-hover border-b transition-colors duration-150">
             <div class="flex flex-col gap-4 p-6 md:p-10">
               <div class="flex items-start justify-between">
-                <h3 class="text-xl font-medium text-white transition-colors group-hover:text-emerald-400">
+                <h3 class="text-ink group-hover:text-accent-hover text-xl font-medium transition-colors">
                   <a href={`/blog/${post.id}`}>{post.data.title}</a>
                 </h3>
                 <time
                   datetime={post.data.pubDate.toISOString()}
-                  class="font-mono text-xs tracking-wider text-neutral-500 uppercase"
+                  class="text-muted font-mono text-xs tracking-wider uppercase"
                 >
                   {post.data.pubDate.toLocaleDateString()}
                 </time>
               </div>
-              <p class="line-clamp-2 max-w-2xl text-sm text-neutral-400">{post.data.description}</p>
+              <p class="text-ink-soft line-clamp-2 max-w-2xl text-sm">{post.data.description}</p>
               <a
                 href={`/blog/${post.id}`}
-                class="mt-2 font-mono text-xs tracking-wider text-emerald-500 uppercase transition-colors hover:text-emerald-400"
+                class="text-accent hover:text-accent-hover mt-2 font-mono text-xs tracking-wider uppercase transition-colors"
                 aria-label={`Read article: ${post.data.title}`}
               >
                 Read Article →
@@ -230,7 +228,7 @@ const { hero, profile, stack, projects } = siteConfig.home;
       <div class="p-6 md:p-10">
         <a
           href="/blog"
-          class="inline-block border border-emerald-500 px-6 py-3 font-mono text-xs text-emerald-500 uppercase transition-colors hover:bg-emerald-500 hover:text-black"
+          class="border-accent text-accent hover:bg-accent hover:text-on-accent inline-block border px-6 py-3 font-mono text-xs uppercase transition-colors"
         >
           View All Posts
         </a>
@@ -243,11 +241,11 @@ const { hero, profile, stack, projects } = siteConfig.home;
     aria-label="Contact Me"
     class="gsap-section scroll-mt-10 px-6 py-24 text-center md:px-16"
   >
-    <h2 class="mb-6 font-mono text-sm font-bold tracking-widest text-emerald-500 uppercase">
+    <h2 class="text-accent mb-6 font-mono text-sm font-bold tracking-widest uppercase">
       // Initialize Handshake
     </h2>
-    <h3 class="mb-8 text-4xl font-semibold text-white md:text-5xl">Ready to collaborate?</h3>
-    <p class="mx-auto mb-12 max-w-lg text-neutral-400">
+    <h3 class="text-ink mb-8 text-4xl font-semibold md:text-5xl">Ready to collaborate?</h3>
+    <p class="text-ink-soft mx-auto mb-12 max-w-lg">
       Currently open for freelance contracts and full-time opportunities. If you need clean code and
       solid architecture, let's talk.
     </p>
@@ -255,32 +253,32 @@ const { hero, profile, stack, projects } = siteConfig.home;
     <div class="mx-auto inline-flex w-full max-w-xs flex-col gap-6">
       <a
         href={`mailto:${siteConfig.site.email}`}
-        class="block w-full bg-emerald-600 py-4 font-mono text-sm font-bold tracking-wider text-black uppercase transition-colors hover:bg-emerald-500"
+        class="bg-accent-fill text-on-accent hover:bg-accent-fill-hover block w-full py-4 font-mono text-sm font-bold tracking-wider uppercase transition-colors"
       >
         Send Email
       </a>
 
       <nav
         aria-label="Social Media Links"
-        class="flex justify-center gap-8 font-mono text-xs tracking-widest text-neutral-500 uppercase"
+        class="text-muted flex justify-center gap-8 font-mono text-xs tracking-widest uppercase"
       >
         <a
           href={siteConfig.site.social.github}
           target="_blank"
           rel="noopener noreferrer"
-          class="transition-colors hover:text-white">GitHub</a
+          class="hover:text-ink transition-colors">GitHub</a
         >
         <a
           href={siteConfig.site.social.linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          class="transition-colors hover:text-white">LinkedIn</a
+          class="hover:text-ink transition-colors">LinkedIn</a
         >
         <a
           href={siteConfig.site.social.twitter}
           target="_blank"
           rel="noopener noreferrer"
-          class="transition-colors hover:text-white">Twitter</a
+          class="hover:text-ink transition-colors">Twitter</a
         >
       </nav>
     </div>

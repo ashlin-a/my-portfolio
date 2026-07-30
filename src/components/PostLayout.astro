@@ -9,13 +9,15 @@ const { title } = Astro.props;
 <div class="mx-auto max-w-4xl px-6 py-20 md:px-16">
   <a
     href="/blog"
-    class="mb-6 inline-block font-mono text-sm tracking-widest text-emerald-500 uppercase hover:underline"
+    class="text-accent mb-6 inline-block font-mono text-sm tracking-widest uppercase hover:underline"
     aria-label="Back to Blog">← Back to Blog</a
   >
 
-  <h1 class="mb-8 text-4xl font-semibold tracking-tight text-white md:text-5xl">{title}</h1>
+  <h1 class="text-ink mb-8 text-4xl font-semibold tracking-tight md:text-5xl">{title}</h1>
 
-  <div class="prose prose-invert prose-emerald max-w-none text-lg leading-relaxed text-neutral-400">
+  <div
+    class="prose prose-emerald dark:prose-invert text-ink-soft max-w-none text-lg leading-relaxed"
+  >
     <slot />
   </div>
 </div>

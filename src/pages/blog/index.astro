@@ -12,19 +12,17 @@ const posts = (await getCollection('blog')).sort(
   description="Articles on self-hosting, homelab, Docker, and web development by Ashlin Asokan."
 >
   <!-- Header Section -->
-  <section class="border-b border-neutral-800 px-6 pt-32 pb-16 md:px-16">
+  <section class="border-line border-b px-6 pt-32 pb-16 md:px-16">
     <div class="max-w-4xl">
-      <p class="header-animate mb-4 font-mono text-sm tracking-widest text-emerald-500 uppercase">
+      <p class="header-animate text-accent mb-4 font-mono text-sm tracking-widest uppercase">
         // Index
       </p>
 
-      <h1
-        class="header-animate mb-8 text-5xl font-semibold tracking-tighter text-white md:text-7xl"
-      >
-        Writing<span class="text-emerald-500">_</span>
+      <h1 class="header-animate text-ink mb-8 text-5xl font-semibold tracking-tighter md:text-7xl">
+        Writing<span class="text-accent">_</span>
       </h1>
 
-      <p class="header-animate max-w-2xl text-lg leading-relaxed text-neutral-400">
+      <p class="header-animate text-ink-soft max-w-2xl text-lg leading-relaxed">
         My personal knowledge base. I write about what I’m building, what broke along the way, and
         how I fixed it.
       </p>
@@ -32,11 +30,11 @@ const posts = (await getCollection('blog')).sort(
   </section>
 
   <!-- Content Section -->
-  <section class="grid border-b border-neutral-800 md:grid-cols-12">
+  <section class="border-line grid border-b md:grid-cols-12">
     <div
-      class="border-b border-neutral-800 bg-neutral-900/20 px-6 py-12 md:col-span-3 md:border-r md:border-b-0 md:px-8"
+      class="border-line bg-surface border-b px-6 py-12 md:col-span-3 md:border-r md:border-b-0 md:px-8"
     >
-      <h2 class="sticky top-24 font-mono text-xs tracking-widest text-neutral-500 uppercase">
+      <h2 class="text-muted sticky top-24 font-mono text-xs tracking-widest uppercase">
         All Posts
       </h2>
     </div>
@@ -45,24 +43,24 @@ const posts = (await getCollection('blog')).sort(
       <ul class="flex flex-col">
         {
           posts.map((post) => (
-            <li class="blog-card group border-b border-neutral-800 transition-colors duration-150 hover:bg-neutral-900/30">
+            <li class="blog-card group border-line hover:bg-surface-hover border-b transition-colors duration-150">
               <article class="flex flex-col gap-6 p-6 md:p-10">
                 <div class="flex items-start justify-between">
-                  <h3 class="text-2xl font-medium text-white transition-colors group-hover:text-emerald-400">
+                  <h3 class="text-ink group-hover:text-accent-hover text-2xl font-medium transition-colors">
                     <a href={`/blog/${post.id}`}>{post.data.title}</a>
                   </h3>
                   <a
                     href={`/blog/${post.id}`}
-                    class="border border-emerald-500 px-3 py-1 font-mono text-xs text-emerald-500 uppercase transition-colors hover:bg-emerald-500 hover:text-black"
+                    class="border-accent text-accent hover:bg-accent hover:text-on-accent border px-3 py-1 font-mono text-xs uppercase transition-colors"
                     aria-label={`Read ${post.data.title}`}
                   >
                     Read Post
                   </a>
                 </div>
                 {post.data.description && (
-                  <p class="max-w-2xl text-neutral-400">{post.data.description}</p>
+                  <p class="text-ink-soft max-w-2xl">{post.data.description}</p>
                 )}
-                <div class="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs tracking-wider text-neutral-500 uppercase">
+                <div class="text-muted flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs tracking-wider uppercase">
                   <time datetime={new Date(post.data.pubDate || Date.now()).toISOString()}>
                     [ {new Date(post.data.pubDate || Date.now()).toLocaleDateString()} ]
                   </time>
@@ -73,7 +71,7 @@ const posts = (await getCollection('blog')).sort(
         }
       </ul>
 
-      {posts.length === 0 && <div class="p-12 font-mono text-neutral-500">// No posts found.</div>}
+      {posts.length === 0 && <div class="text-muted p-12 font-mono">// No posts found.</div>}
     </div>
   </section>
 </Layout>
