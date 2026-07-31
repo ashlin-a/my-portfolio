@@ -1,14 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <!-- Background -->
-  <rect width="32" height="32" rx="6" fill="#000000"/>
+  <!-- Editorial mark: a high-contrast serif "A" (thin left stroke, thick right
+       stroke, slab feet) in ink blue on paper. Colors follow the OS theme. -->
+  <style>
+    :root { --bg: #fbfaf7; --fg: #1d3f8f; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #0e0d0b; --fg: #9db8ff; }
+    }
+  </style>
 
-  <!-- "A" Letterform using JetBrains Mono inspired geometry -->
-  <!-- Manually constructed path to mimic the font's clean, technical character -->
-  <path d="M11 22L16 8L21 22" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <rect width="32" height="32" rx="6" fill="var(--bg)"/>
 
-  <!-- Terminal Prompt Motif (_ cursor) as the crossbar -->
-  <path d="M13.5 17.5H18.5" stroke="#10B981" stroke-width="2.5" stroke-linecap="round"/>
-
-  <!-- Terminal Carrot (>) using technical Inter-style geometry -->
-  <path d="M7 14L9 16L7 18" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <g fill="var(--fg)">
+    <!-- thin stroke -->
+    <path d="M14.4 6h2v0.6L12.6 25h-1.4z"/>
+    <!-- thick stroke -->
+    <path d="M16.4 6h2.2L23 25h-3.6z"/>
+    <!-- crossbar -->
+    <rect x="13.2" y="19.2" width="7.2" height="1.1"/>
+    <!-- feet -->
+    <rect x="9.4" y="24.6" width="5.2" height="1.4"/>
+    <rect x="18.4" y="24.6" width="6" height="1.4"/>
+  </g>
 </svg>

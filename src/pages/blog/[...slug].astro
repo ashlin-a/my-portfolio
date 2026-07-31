@@ -22,7 +22,12 @@ const { Content } = await render(post);
   ogType="article"
   article={{ publishedTime: post.data.pubDate, modifiedTime: post.data.updatedDate }}
 >
-  <PostLayout title={post.data.title}>
+  <PostLayout
+    title={post.data.title}
+    description={post.data.description}
+    pubDate={post.data.pubDate}
+    updatedDate={post.data.updatedDate}
+  >
     <Content />
   </PostLayout>
 </Layout>

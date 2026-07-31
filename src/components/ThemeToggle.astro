@@ -9,7 +9,7 @@
   type="button"
   aria-label="Toggle color theme"
   aria-pressed="false"
-  class="border-line text-muted hover:border-accent hover:text-accent relative z-50 flex h-8 w-8 items-center justify-center rounded-sm border transition-colors"
+  class="border-line text-muted hover:border-accent hover:text-accent relative z-50 flex h-8 w-8 items-center justify-center border transition-colors"
 >
   <svg
     class="h-4 w-4 dark:hidden"
@@ -55,7 +55,7 @@
 
   function apply(dark: boolean, persist: boolean) {
     root.classList.toggle('dark', dark);
-    meta?.setAttribute('content', dark ? '#000000' : '#ffffff');
+    meta?.setAttribute('content', dark ? '#0e0d0b' : '#fbfaf7');
     btn?.setAttribute('aria-pressed', String(dark));
 
     if (persist) {

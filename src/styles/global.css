@@ -1,61 +1,92 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
-/* Class-based dark mode: `.dark` is set on <html> by the inline head script. */
+/* Class-based dark mode: `.dark` is set on <html> by the inline head script.
+   Only the ThemeToggle icons and the Shiki dual-theme rules still need it —
+   everything else themes through the tokens below. */
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* Semantic palette. Light values are the base; `:root.dark` below overrides
-   every token, so a theme switch is a single class flip on <html>. */
+   every token, so a theme switch is a single class flip on <html>.
+   Warm neutrals (paper / warm near-black) with a deep ink-blue accent. */
 @theme {
   --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  --color-canvas: #ffffff;
-  --color-surface: #fafafa;
-  --color-surface-hover: #f5f5f5;
+  /* Fluid editorial type. Every size on the site is a token — no arbitrary
+     font sizes in markup. The scale is deliberately wide at both ends: 11px
+     meta against a 136px display is what makes the pages read as editorial.
+     The 8.5rem display cap is a content constraint, not taste — the longest
+     hero line is ~18 characters, which is about what fits `max-w-6xl` minus
+     gutters on one line. The 2.75rem floor keeps it on one line at 375px. */
+  --text-display: clamp(2.75rem, 12vw, 8.5rem);
+  --text-display--line-height: 0.86;
+  --text-display--letter-spacing: -0.03em;
 
-  --color-line: #e5e5e5;
-  --color-line-strong: #d4d4d4;
+  --text-headline: clamp(2.25rem, 6.5vw, 5rem);
+  --text-headline--line-height: 0.95;
+  --text-headline--letter-spacing: -0.02em;
 
-  --color-ink: #171717;
-  --color-ink-soft: #404040;
-  --color-muted: #737373;
-  --color-faint: #a3a3a3;
+  /* Project titles, post titles, the contact email. */
+  --text-title: clamp(1.75rem, 3.4vw, 3rem);
+  --text-title--line-height: 1.05;
+  --text-title--letter-spacing: -0.015em;
 
-  --color-accent: #047857; /* emerald-700 — 5.5:1 on white */
-  --color-accent-hover: #065f46; /* emerald-800 */
-  --color-accent-fill: #059669; /* emerald-600 — background only */
-  --color-accent-fill-hover: #047857;
-  --color-on-accent: #ffffff;
+  /* Hero lede and post standfirsts. */
+  --text-lede: clamp(1.25rem, 1.9vw, 1.75rem);
+  --text-lede--line-height: 1.45;
 
-  --color-selection: #d1fae5;
+  /* Running body copy. */
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.75;
 
-  --color-code-bg: #f6f8fa;
+  --color-canvas: #fbfaf7;
+  --color-surface: #f4f2ec;
+  --color-surface-hover: #edeae2;
+
+  --color-line: #e2ded4;
+  --color-line-strong: #c8c2b4;
+
+  --color-ink: #191714; /* 17.1:1 on canvas */
+  --color-ink-soft: #423e37; /* 10.2:1 */
+  --color-muted: #6e6759; /* 5.4:1 */
+  --color-faint: #7a7364; /* 4.5:1 — lowest text token, still AA */
+
+  --color-accent: #1d3f8f; /* ink blue — 9.3:1 on canvas */
+  --color-accent-hover: #142e6e;
+  --color-accent-fill: #1d3f8f;
+  --color-accent-fill-hover: #142e6e;
+  --color-on-accent: #fbfaf7;
+
+  --color-selection: #d8e1f7;
+
+  --color-code-bg: #f3f1ea;
   --color-code-highlight: rgba(0, 0, 0, 0.05);
 }
 
 :root.dark {
-  --color-canvas: #000000;
-  --color-surface: #050505;
-  --color-surface-hover: #080808;
+  --color-canvas: #0e0d0b;
+  --color-surface: #141210;
+  --color-surface-hover: #1b1916;
 
-  --color-line: #262626;
-  --color-line-strong: #404040;
+  --color-line: #2a2721;
+  --color-line-strong: #46413a;
 
-  --color-ink: #ffffff;
-  --color-ink-soft: #d4d4d4;
-  --color-muted: #737373;
-  --color-faint: #525252;
+  --color-ink: #f5f2ea; /* 17.4:1 on canvas */
+  --color-ink-soft: #cfc9bc; /* 11.8:1 */
+  --color-muted: #948c7c; /* 5.8:1 */
+  --color-faint: #857e6d; /* 4.8:1 */
 
-  --color-accent: #10b981; /* emerald-500 */
-  --color-accent-hover: #34d399; /* emerald-400 */
-  --color-accent-fill: #059669;
-  --color-accent-fill-hover: #10b981;
-  --color-on-accent: #000000;
+  --color-accent: #9db8ff; /* 9.9:1 on canvas */
+  --color-accent-hover: #c2d2ff;
+  --color-accent-fill: #2e4fa8; /* background only — 6.7:1 under on-accent */
+  --color-accent-fill-hover: #3a5ec0;
+  --color-on-accent: #f5f2ea;
 
-  --color-selection: #064e3b;
+  --color-selection: #1e3060;
 
-  --color-code-bg: #0c0c0c;
+  --color-code-bg: #121110;
   --color-code-highlight: rgba(255, 255, 255, 0.06);
 }
 
@@ -66,19 +97,30 @@
   color-scheme: dark;
 }
 
-/* Cursor Blink Animation for Hero */
-.cursor-blink {
-  animation: blink 1.2s step-end infinite;
+/* Metadata lettering — section numerals, dates, tags, group labels, footer.
+   A utility rather than a repeated five-class string. Colour is deliberately
+   left out so it composes — but pair it with a text token (`meta text-muted`),
+   never with `line`/`line-strong`, which are rule colours and miss AA. */
+@utility meta {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }
 
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
+/* ── Base ─────────────────────────────────────────────────── */
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink-soft);
+}
+
+/* One focus ring for every interactive element, so pages don't each
+   repeat the same focus-visible utilities. */
+:where(a, button, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 /* Custom Scrollbar for Webkit */
@@ -99,9 +141,186 @@ html {
   scrollbar-color: var(--color-line-strong) var(--color-canvas);
 }
 
-body {
+/* ── Motion ───────────────────────────────────────────────────
+   All motion is additive over a visible resting state — nothing is
+   hidden by default, so the page is complete with CSS alone and stays
+   complete if scroll-driven animations are unsupported. */
+
+@keyframes enter-up {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Load-time stagger. Order comes from an inline `--i` on each child. */
+@media (prefers-reduced-motion: no-preference) {
+  .enter {
+    animation: enter-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--i, 0) * 90ms);
+  }
+}
+
+/* Scroll reveals. Guarded by @supports so browsers without scroll-driven
+   animations render everything at full opacity rather than blank. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 25%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Mobile menu (native popover, no JS for open/close) ────── */
+
+/* A popover renders in the top layer, which paints above every z-index — a
+   full-bleed `inset: 0` would cover the fixed nav and bury the toggle that
+   closes it. Start below the nav (h-14 = 3.5rem) so the burger→X stays
+   visible and clickable. `width`/`height: auto` are needed to beat the UA's
+   `fit-content` sizing now that the inset does the sizing. */
+#mobile-menu {
+  position: fixed;
+  inset: 3.5rem 0 0 0;
+  width: auto;
+  max-width: none;
+  /* Second declaration wins where `dvh` is supported and gives the menu a
+     definite height, so the list's `h-full` centring resolves; the first is
+     the fallback if it isn't. */
+  height: auto;
+  height: calc(100dvh - 3.5rem);
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
   background-color: var(--color-canvas);
-  color: var(--color-ink-soft);
+  color: inherit;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    display 0.3s allow-discrete,
+    overlay 0.3s allow-discrete;
+}
+
+#mobile-menu:popover-open {
+  opacity: 1;
+}
+
+@starting-style {
+  #mobile-menu:popover-open {
+    opacity: 0;
+  }
+}
+
+/* Lock the page behind the overlay. */
+html:has(#mobile-menu:popover-open) {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #mobile-menu:popover-open .menu-link {
+    animation: enter-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--i, 0) * 60ms + 80ms);
+  }
+}
+
+/* Burger → X, driven entirely by the popover's open state. Classes (not
+   inline styles) own the color, so switching theme while the menu is open
+   can't strand a stale value. */
+#line-1,
+#line-2 {
+  transition:
+    transform 0.3s ease,
+    width 0.3s ease,
+    background-color 0.3s ease;
+}
+
+:root:has(#mobile-menu:popover-open) #line-1 {
+  transform: translateY(0.25rem) rotate(45deg);
+}
+
+:root:has(#mobile-menu:popover-open) #line-2 {
+  width: 1.5rem;
+  transform: translateY(-0.25rem) rotate(-45deg);
+  background-color: var(--color-ink);
+}
+
+/* ── Long-form typography ─────────────────────────────────────
+   Prose colors map onto the palette tokens, so posts flip with the
+   rest of the site — no `prose-invert`, no hue baked into a class. */
+
+.prose {
+  --tw-prose-body: var(--color-ink-soft);
+  --tw-prose-headings: var(--color-ink);
+  --tw-prose-lead: var(--color-ink-soft);
+  --tw-prose-links: var(--color-accent);
+  --tw-prose-bold: var(--color-ink);
+  --tw-prose-counters: var(--color-muted);
+  --tw-prose-bullets: var(--color-line-strong);
+  --tw-prose-hr: var(--color-line);
+  --tw-prose-quotes: var(--color-ink);
+  --tw-prose-quote-borders: var(--color-accent);
+  --tw-prose-captions: var(--color-muted);
+  --tw-prose-code: var(--color-ink);
+  --tw-prose-pre-code: var(--color-ink-soft);
+  --tw-prose-pre-bg: var(--color-code-bg);
+  --tw-prose-th-borders: var(--color-line-strong);
+  --tw-prose-td-borders: var(--color-line);
+}
+
+.prose :is(h2, h3, h4) {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.prose :is(h2, h3, h4) strong {
+  font-weight: 400;
+}
+
+.prose a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.prose blockquote {
+  font-style: normal;
+  font-family: var(--font-serif);
+  font-size: 1.15em;
+}
+
+.prose blockquote p::before,
+.prose blockquote p::after {
+  content: '';
 }
 
 /* ── Code blocks ──────────────────────────────────────────── */
@@ -166,7 +385,8 @@ body {
     color 0.15s;
 }
 
-.prose pre:hover .copy-btn {
+.prose pre:hover .copy-btn,
+.copy-btn:focus-visible {
   opacity: 1;
 }
 

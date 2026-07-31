@@ -1,26 +1,48 @@
 ---
 interface Props {
   title: string;
+  description?: string;
+  pubDate: Date;
+  updatedDate?: Date;
 }
 
-const { title } = Astro.props;
+const { title, description, pubDate, updatedDate } = Astro.props;
+
+const format = (date: Date) =>
+  date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 ---
 
-<div class="mx-auto max-w-4xl px-6 py-20 md:px-16">
-  <a
-    href="/blog"
-    class="text-accent mb-6 inline-block font-mono text-sm tracking-widest uppercase hover:underline"
-    aria-label="Back to Blog">← Back to Blog</a
-  >
+<article>
+  <header class="border-line border-b">
+    <div class="mx-auto max-w-3xl px-6 pt-28 pb-14 md:px-10 md:pt-40">
+      <a href="/blog" class="meta text-muted hover:text-ink transition-colors"> ← Writing </a>
 
-  <h1 class="text-ink mb-8 text-4xl font-semibold tracking-tight md:text-5xl">{title}</h1>
+      <h1 class="text-ink text-headline mt-8 font-serif">{title}</h1>
 
-  <div
-    class="prose prose-emerald dark:prose-invert text-ink-soft max-w-none text-lg leading-relaxed"
-  >
-    <slot />
+      {description && <p class="text-ink-soft text-lede mt-8">{description}</p>}
+
+      <p class="meta text-muted mt-10">
+        <time datetime={pubDate.toISOString()}>{format(pubDate)}</time>
+        {
+          updatedDate && (
+            <>
+              {' · Updated '}
+              <time datetime={updatedDate.toISOString()}>{format(updatedDate)}</time>
+            </>
+          )
+        }
+      </p>
+    </div>
+  </header>
+
+  <div class="mx-auto max-w-3xl px-6 py-20 md:px-10">
+    <!-- `max-w-none` hands the measure to the container above, so the prose
+         plugin's own max-width can't fight the page grid. -->
+    <div class="prose prose-lg max-w-none">
+      <slot />
+    </div>
   </div>
-</div>
+</article>
 
 <script>
   document.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {

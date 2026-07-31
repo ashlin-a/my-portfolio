@@ -1,6 +1,6 @@
-# Portfolio\_
+# Portfolio
 
-A high-performance, minimalist portfolio website for a Senior Full-Stack Engineer. Built with a focus on clean architecture, type safety, and zero bloat. This project uses a modern tech stack to deliver a fast, accessible, and visually engaging experience.
+A high-performance, editorial portfolio website for a full-stack engineer — large serif display type, generous whitespace, an asymmetric grid, and hairline rules on a warm paper/ink palette. Built with a focus on clean architecture, type safety, and zero bloat.
 
 ## Tech Stack
 
@@ -9,22 +9,23 @@ This project leverages the following technologies:
 - **Core Framework:** [Astro](https://astro.build/) (v6) - For zero-JS-by-default performance and content collections.
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/) (v4) - Utility-first styling on a semantic token palette that drives both light and dark themes.
 - **Runtime & Package Manager:** [Bun](https://bun.sh/) - Fast all-in-one JavaScript runtime.
-- **Animations:** [GSAP](https://gsap.com/) - High-performance animations (ScrollTrigger, staggered reveals).
+- **Animations:** Native CSS only - scroll-driven `animation-timeline: view()` reveals and keyframe staggers, no animation library.
 - **Type Safety:** [TypeScript](https://www.typescriptlang.org/) - Strict type checking across the entire codebase.
 - **Containerization:** [Docker](https://www.docker.com/) - Multi-stage builds for development and production (Nginx).
 
 ## Features
 
-- **Light & Dark Themes:** Custom "Inter" and "JetBrains Mono" typography with a terminal-inspired aesthetic. Follows the OS preference by default; a navbar toggle overrides it, persisted in `localStorage` and applied before first paint so there is no flash.
+- **Editorial Typography:** "Instrument Serif" for display, "Inter" for body, "JetBrains Mono" for metadata and code, on fluid `clamp()` display sizes declared as theme tokens.
+- **Light & Dark Themes:** A warm paper/ink-blue semantic token palette where every text color clears WCAG AA in both modes. Follows the OS preference by default; a navbar toggle overrides it, persisted in `localStorage` and applied before first paint so there is no flash.
 - **High Performance:** Static Site Generation (SSG) with Astro for optimal loading speeds.
-- **Interactive Animations:**
-  - Smooth page fade-ins.
-  - Staggered hero text reveals.
-  - Scroll-triggered section reveals.
-  - Staggered list items and cards.
+- **Animations without JavaScript:**
+  - Scroll reveals via CSS scroll-driven animations, feature-detected so unsupported browsers simply show the content.
+  - Keyframe entry staggers on the hero and page headers.
+  - A mobile menu built on the native Popover API — Escape, light-dismiss and `aria-expanded` come from the platform.
+  - Full `prefers-reduced-motion` support.
 - **Content Management:** Markdown-based blog using Astro Content Collections with `@tailwindcss/typography` styling.
 - **Responsive Design:** Fully fluid layout that adapts to mobile, tablet, and desktop screens.
-- **Configurable:** Centralized configuration (`src/config/`) for site metadata and navigation.
+- **Configurable:** Centralized configuration (`src/config/`) for site metadata, navigation, and every page section — hero, profile, stack, projects, and contact are edited as data, not markup.
 
 ## Getting Started
 
@@ -98,7 +99,7 @@ Access at `http://localhost:8080`.
 │   ├── config/            # Centralized site config (Site Info, Nav)
 │   ├── content/           # Blog posts (Markdown)
 │   ├── layouts/           # Page layouts (Layout.astro)
-│   ├── pages/             # Route definitions (index.astro, blog/, posts/)
+│   ├── pages/             # Route definitions (index.astro, 404.astro, blog/, og/)
 │   └── styles/            # Global CSS & Tailwind config
 └── tsconfig.json          # TypeScript configuration
 ```

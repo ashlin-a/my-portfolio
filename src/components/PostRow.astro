@@ -1,0 +1,37 @@
+---
+// One row treatment for the writing list, shared by the home page and the
+// blog index so the two can't drift apart. Reads as a contents page: the
+// date hangs in the right margin, the title runs wide on the left.
+interface Props {
+  href: string;
+  title: string;
+  description?: string;
+  pubDate: Date;
+}
+
+const { href, title, description, pubDate } = Astro.props;
+
+const dateLabel = pubDate.toLocaleDateString('en-GB', {
+  day: '2-digit',
+  month: 'short',
+  year: 'numeric',
+});
+---
+
+<li class="reveal border-line hover:border-line-strong group relative border-t transition-colors">
+  <article class="grid gap-y-3 py-8 md:grid-cols-12 md:gap-x-10 md:py-10">
+    <!-- Date first in DOM so mobile stacks date → title; `row-start-1` puts it
+         back in the right margin from `md` up. -->
+    <div class="md:col-span-3 md:col-start-10 md:row-start-1 md:text-right">
+      <time datetime={pubDate.toISOString()} class="meta text-muted">{dateLabel}</time>
+    </div>
+
+    <div class="md:col-span-8 md:row-start-1">
+      <h3 class="text-ink group-hover:text-accent text-title font-serif transition-colors">
+        <!-- Stretched link: the whole row is the hit target. -->
+        <a href={href} class="before:absolute before:inset-0 before:content-['']">{title}</a>
+      </h3>
+      {description && <p class="text-ink-soft text-body mt-3 max-w-[58ch]">{description}</p>}
+    </div>
+  </article>
+</li>
