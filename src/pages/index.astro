@@ -8,7 +8,7 @@ const recentPosts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
-const { hero, profile, stack, projects, writing, contact } = siteConfig.home;
+const { hero, stack, projects, writing, contact } = siteConfig.home;
 
 const linkClass =
   'text-accent hover:text-accent-hover decoration-line-strong hover:decoration-accent text-sm font-medium underline decoration-1 underline-offset-[6px] transition-colors';
@@ -61,29 +61,10 @@ const linkClass =
     </div>
   </section>
 
-  {/* 01 — Profile. One text column; only the numeral hangs in the right margin. */}
-  <section id="about" aria-label="About me" class="border-line scroll-mt-20 border-t">
-    <div class="mx-auto max-w-6xl px-6 py-28 md:px-10 md:py-44 lg:px-16">
-      <div class="grid gap-y-8 md:grid-cols-12 md:gap-x-10">
-        <p class="meta text-muted md:col-span-3 md:col-start-10 md:row-start-1 md:text-right">
-          01 / Profile
-        </p>
-
-        <div class="reveal md:col-span-8 md:col-start-1 md:row-start-1">
-          <h2 class="text-ink text-headline font-serif">{profile.heading}</h2>
-
-          <div class="text-ink-soft text-body mt-10 max-w-[58ch] space-y-6 md:mt-14">
-            {profile.content.map((paragraph) => <p>{paragraph}</p>)}
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  {/* 02 — Stack. Colophon grid: no rail, ragged final row by design. */}
+  {/* Stack. Colophon grid: no rail, ragged final row by design. */}
   <section id="skills" aria-label="Tech stack" class="border-line scroll-mt-20 border-t">
-    <div class="mx-auto max-w-6xl px-6 py-24 md:px-10 md:py-32 lg:px-16">
-      <p class="meta text-muted">02 / Stack</p>
+    <div class="mx-auto max-w-6xl px-6 py-24 md:px-10 md:py-40 lg:px-16">
+      <p class="meta text-muted">Stack</p>
       <h2 class="text-ink text-title mt-5 font-serif">{stack.heading}</h2>
 
       <div class="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
@@ -103,10 +84,10 @@ const linkClass =
     </div>
   </section>
 
-  {/* 03 — Work. Title and description in one column; tags and links hang in the right margin. */}
+  {/* Work. Title and description in one column; tags and links hang in the right margin. */}
   <section id="projects" aria-label="Selected projects" class="border-line scroll-mt-20 border-t">
     <div class="mx-auto max-w-6xl px-6 py-28 md:px-10 md:py-40 lg:px-16">
-      <p class="meta text-muted">03 / Work</p>
+      <p class="meta text-muted">Work</p>
       <h2 class="text-ink text-title mt-5 font-serif">{projects.heading}</h2>
 
       <ol class="mt-16 space-y-14 md:mt-20 md:space-y-20">
@@ -162,10 +143,10 @@ const linkClass =
     </div>
   </section>
 
-  {/* 04 — Writing. Contents page: dates hang in the right margin. */}
+  {/* Writing. Contents page: dates hang in the right margin. */}
   <section id="blog" aria-label="Recent writing" class="border-line scroll-mt-20 border-t">
     <div class="mx-auto max-w-6xl px-6 py-24 md:px-10 md:py-32 lg:px-16">
-      <p class="meta text-muted">04 / Writing</p>
+      <p class="meta text-muted">Writing</p>
       <h2 class="text-ink text-title mt-5 font-serif">{writing.heading}</h2>
 
       <ul class="mt-14 md:mt-16">
@@ -185,10 +166,10 @@ const linkClass =
     </div>
   </section>
 
-  {/* 05 — Contact. Statement across the page, then a split. */}
+  {/* Contact. Statement across the page, then a split. */}
   <section id="contact" aria-label="Contact me" class="border-line scroll-mt-20 border-t">
     <div class="mx-auto max-w-6xl px-6 py-32 md:px-10 md:py-48 lg:px-16">
-      <p class="meta text-muted">05 / {contact.label}</p>
+      <p class="meta text-muted">{contact.label}</p>
 
       <h2 class="reveal text-ink text-headline mt-8 max-w-[16ch] font-serif">
         {contact.heading}

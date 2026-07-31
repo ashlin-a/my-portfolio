@@ -13,8 +13,9 @@ interface Project {
 
 /**
  * Every section carries its own `heading`, so no page ever hardcodes one and
- * the wording stays editable here. The numerals (01…05) are ornament and live
- * in the markup, since they encode section order rather than content.
+ * the wording stays editable here. The page carries no section numerals; the
+ * only numerals in the markup are the per-project indices, derived from the
+ * order of `projects.items`.
  */
 interface HomeConfig {
   hero: {
@@ -24,10 +25,6 @@ interface HomeConfig {
     description: string;
     primaryBtn: Link;
     secondaryBtn: Link;
-  };
-  profile: {
-    heading: string;
-    content: string[];
   };
   stack: {
     heading: string;
@@ -54,8 +51,7 @@ export const homeConfig: HomeConfig = {
   hero: {
     label: "Hello, I'm Ashlin",
     headline: ["Glad you're here.", 'Have a look around'],
-    description:
-      'This is where I document my experiments and projects. I love open-source tools, clean systems, and seeing how things work under the hood.',
+    description: "Little corner of the web where I keep track of what I make and what I'm into.",
     primaryBtn: {
       text: 'View projects',
       href: '#projects',
@@ -64,13 +60,6 @@ export const homeConfig: HomeConfig = {
       text: 'Get in touch',
       href: '#contact',
     },
-  },
-  profile: {
-    heading: 'How I work.',
-    content: [
-      'I believe the best way to learn is by doing, which is why I don’t stop at localhost. I’m a graduate who loves the entire stack - from designing responsive UIs in React to managing the Linux servers that host them.',
-      'My home lab is my testing ground. It’s where I experiment with Docker, configure reverse proxies, and learn the hard lessons about deployment and uptime. I’m ready to bring that full-lifecycle understanding to a professional team.',
-    ],
   },
   stack: {
     heading: 'What I build with.',
@@ -158,7 +147,7 @@ export const homeConfig: HomeConfig = {
   },
 
   writing: {
-    heading: 'Notes from the build.',
+    heading: 'Thinking out loud',
   },
 
   contact: {
