@@ -8,148 +8,144 @@ const recentPosts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
-const { hero, profile, stack, projects, contact } = siteConfig.home;
+const { hero, profile, stack, projects, writing, contact } = siteConfig.home;
+
+const linkClass =
+  'text-accent hover:text-accent-hover decoration-line-strong hover:decoration-accent text-sm font-medium underline decoration-1 underline-offset-[6px] transition-colors';
 ---
 
 <Layout>
-  <!-- Hero -->
+  {/* Hero — full-bleed statement, lede offset into the right half. */}
   <section
-    class="mx-auto flex min-h-[88vh] max-w-6xl flex-col justify-center px-6 py-24 md:px-10 lg:px-16"
+    class="mx-auto flex min-h-[calc(100svh-3.5rem)] max-w-6xl flex-col justify-between px-6 pt-24 pb-10 md:px-10 md:pt-32 lg:px-16"
   >
-    <p class="enter text-muted font-mono text-xs tracking-[0.14em] uppercase" style="--i:0">
-      {hero.label}
-    </p>
+    <div class="flex flex-1 flex-col justify-center">
+      <p class="enter meta text-muted" style="--i:0">{hero.label}</p>
 
-    <h1 class="enter text-ink text-display mt-8 font-serif" style="--i:1">
-      {hero.headline.map((line) => <span class="block">{line}</span>)}
-    </h1>
+      <h1 class="enter text-ink text-display mt-6 font-serif" style="--i:1">
+        {hero.headline.map((line) => <span class="block">{line}</span>)}
+      </h1>
 
-    <p
-      class="enter text-ink-soft mt-10 max-w-[38ch] text-xl leading-relaxed md:text-2xl"
-      style="--i:2"
-    >
-      {hero.description}
-    </p>
+      <div class="mt-12 grid md:grid-cols-12 md:gap-x-10">
+        <div class="md:col-span-6 md:col-start-7">
+          <p class="enter text-ink-soft text-lede" style="--i:2">{hero.description}</p>
 
+          <div
+            class="enter mt-10 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8"
+            style="--i:3"
+          >
+            <a
+              href={hero.primaryBtn.href}
+              class="bg-accent-fill text-on-accent hover:bg-accent-fill-hover px-7 py-3.5 text-sm font-medium transition-colors"
+            >
+              {hero.primaryBtn.text}
+            </a>
+            <a
+              href={hero.secondaryBtn.href}
+              class="text-ink decoration-line-strong hover:decoration-accent text-sm font-medium underline decoration-1 underline-offset-[6px] transition-colors"
+            >
+              {hero.secondaryBtn.text}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Colophon band, sitting on the fold. Both values are derived. */}
     <div
-      class="enter mt-14 flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-10"
-      style="--i:3"
+      class="enter border-line meta text-muted mt-16 flex items-center justify-between gap-4 border-t pt-5"
+      style="--i:4"
     >
-      <a
-        href={hero.primaryBtn.href}
-        class="bg-accent-fill text-on-accent hover:bg-accent-fill-hover px-7 py-3.5 text-sm font-medium transition-colors"
-      >
-        {hero.primaryBtn.text}
-      </a>
-      <a
-        href={hero.secondaryBtn.href}
-        class="text-ink decoration-line-strong hover:decoration-accent text-sm font-medium underline decoration-1 underline-offset-[6px] transition-colors"
-      >
-        {hero.secondaryBtn.text}
-      </a>
+      <span>{siteConfig.site.jobTitle}</span>
+      <span>{new Date().getFullYear()}</span>
     </div>
   </section>
 
-  <!-- 01 — Profile -->
+  {/* 01 — Profile. One text column; only the numeral hangs in the right margin. */}
   <section id="about" aria-label="About me" class="border-line scroll-mt-20 border-t">
-    <div
-      class="mx-auto grid max-w-6xl gap-y-10 px-6 py-24 md:grid-cols-12 md:gap-x-10 md:px-10 md:py-32 lg:px-16"
-    >
-      <div class="md:col-span-3">
-        <h2 class="text-muted font-mono text-xs tracking-[0.14em] uppercase md:sticky md:top-24">
+    <div class="mx-auto max-w-6xl px-6 py-28 md:px-10 md:py-44 lg:px-16">
+      <div class="grid gap-y-8 md:grid-cols-12 md:gap-x-10">
+        <p class="meta text-muted md:col-span-3 md:col-start-10 md:row-start-1 md:text-right">
           01 / Profile
-        </h2>
-      </div>
+        </p>
 
-      <div class="reveal md:col-span-8 md:col-start-5">
-        <p class="text-ink text-headline font-serif">{profile.heading}</p>
-        <div class="text-ink-soft mt-10 max-w-[68ch] space-y-6 text-lg leading-[1.7]">
-          {profile.content.map((paragraph) => <p>{paragraph}</p>)}
+        <div class="reveal md:col-span-8 md:col-start-1 md:row-start-1">
+          <h2 class="text-ink text-headline font-serif">{profile.heading}</h2>
+
+          <div class="text-ink-soft text-body mt-10 max-w-[58ch] space-y-6 md:mt-14">
+            {profile.content.map((paragraph) => <p>{paragraph}</p>)}
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 02 — Stack -->
+  {/* 02 — Stack. Colophon grid: no rail, ragged final row by design. */}
   <section id="skills" aria-label="Tech stack" class="border-line scroll-mt-20 border-t">
-    <div
-      class="mx-auto grid max-w-6xl gap-y-10 px-6 py-24 md:grid-cols-12 md:gap-x-10 md:px-10 md:py-32 lg:px-16"
-    >
-      <div class="md:col-span-3">
-        <h2 class="text-muted font-mono text-xs tracking-[0.14em] uppercase md:sticky md:top-24">
-          02 / Stack
-        </h2>
-      </div>
+    <div class="mx-auto max-w-6xl px-6 py-24 md:px-10 md:py-32 lg:px-16">
+      <p class="meta text-muted">02 / Stack</p>
+      <h2 class="text-ink text-title mt-5 font-serif">{stack.heading}</h2>
 
-      <div class="md:col-span-9 md:col-start-4">
-        <dl>
-          {
-            stack.map((group) => (
-              <div class="reveal border-line grid gap-y-4 border-t py-8 first:border-t-0 first:pt-0 md:grid-cols-9 md:gap-x-10">
-                <dt class="text-ink font-serif text-2xl md:col-span-3">{group.title}</dt>
-                <dd class="md:col-span-6">
-                  <ul class="text-ink-soft flex flex-wrap text-lg">
-                    {group.items.map((item) => (
-                      <li class="before:text-line-strong before:mx-3 before:content-['·'] first:before:hidden">
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </dd>
-              </div>
-            ))
-          }
-        </dl>
+      <div class="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          stack.groups.map((group) => (
+            <div class="reveal border-line border-t pt-5">
+              <h3 class="meta text-muted">{group.title}</h3>
+              <ul class="text-ink mt-4 space-y-1.5 font-serif text-xl">
+                {group.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
 
-  <!-- 03 — Selected work -->
+  {/* 03 — Work. Title and description in one column; tags and links hang in the right margin. */}
   <section id="projects" aria-label="Selected projects" class="border-line scroll-mt-20 border-t">
-    <div class="mx-auto max-w-6xl px-6 py-24 md:px-10 md:py-32 lg:px-16">
-      <h2 class="text-muted font-mono text-xs tracking-[0.14em] uppercase">03 / Selected work</h2>
+    <div class="mx-auto max-w-6xl px-6 py-28 md:px-10 md:py-40 lg:px-16">
+      <p class="meta text-muted">03 / Work</p>
+      <h2 class="text-ink text-title mt-5 font-serif">{projects.heading}</h2>
 
-      <ol class="mt-14">
+      <ol class="mt-16 space-y-14 md:mt-20 md:space-y-20">
         {
-          projects.map((project, i) => {
+          projects.items.map((project, i) => {
             const links = project.links ?? (project.link ? [project.link] : []);
             return (
-              <li class="reveal border-line hover:border-line-strong group border-t transition-colors">
-                <article class="grid gap-y-6 py-10 md:grid-cols-12 md:gap-x-10 md:py-14">
-                  <div class="md:col-span-2">
-                    <span class="text-line-strong font-serif text-5xl leading-none">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                  </div>
-
-                  <div class="md:col-span-10">
-                    <h3 class="text-ink group-hover:text-accent font-serif text-3xl transition-colors md:text-4xl">
+              <li class="reveal border-line group border-t pt-8 md:pt-10">
+                <article class="grid gap-y-6 md:grid-cols-12 md:gap-x-10">
+                  <div class="md:col-span-7 md:col-start-1 md:row-start-1">
+                    <span class="meta text-muted block">{String(i + 1).padStart(2, '0')}</span>
+                    <h3 class="text-ink group-hover:text-accent text-title mt-3 font-serif transition-colors">
                       {project.title}
                     </h3>
+                    <p class="text-ink-soft text-body mt-5 max-w-[56ch]">{project.description}</p>
+                  </div>
 
-                    <p class="text-ink-soft mt-5 max-w-[62ch] text-lg leading-[1.7]">
-                      {project.description}
-                    </p>
-
-                    <ul
-                      class="text-muted mt-7 flex flex-wrap font-mono text-xs tracking-[0.14em] uppercase"
-                      aria-label="Technologies used"
-                    >
+                  <div class="md:col-span-3 md:col-start-10 md:row-start-1">
+                    {/* Spec list, one per line. Middot separators can't be used
+                        here: under flex-wrap every wrapped line starts with an
+                        orphaned separator, and multi-word tags ("Better Auth",
+                        "AWS S3") run together without one. */}
+                    <ul class="meta text-muted space-y-1.5" aria-label="Technologies used">
                       {project.tags.map((tag) => (
-                        <li class="before:text-line-strong before:mx-3 before:content-['·'] first:before:hidden">
-                          {tag}
-                        </li>
+                        <li>{tag}</li>
                       ))}
                     </ul>
 
                     {links.length > 0 && (
-                      <div class="mt-8 flex flex-wrap gap-x-8 gap-y-3" aria-label="Project links">
+                      <div
+                        class="border-line mt-7 flex flex-wrap gap-x-6 gap-y-3 border-t pt-6"
+                        aria-label="Project links"
+                      >
                         {links.map((link) => (
                           <a
                             href={link.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="text-accent hover:text-accent-hover decoration-line-strong hover:decoration-accent text-sm font-medium underline decoration-1 underline-offset-[6px] transition-colors"
+                            class={linkClass}
                           >
                             {link.text}
                           </a>
@@ -166,12 +162,13 @@ const { hero, profile, stack, projects, contact } = siteConfig.home;
     </div>
   </section>
 
-  <!-- 04 — Writing -->
+  {/* 04 — Writing. Contents page: dates hang in the right margin. */}
   <section id="blog" aria-label="Recent writing" class="border-line scroll-mt-20 border-t">
     <div class="mx-auto max-w-6xl px-6 py-24 md:px-10 md:py-32 lg:px-16">
-      <h2 class="text-muted font-mono text-xs tracking-[0.14em] uppercase">04 / Writing</h2>
+      <p class="meta text-muted">04 / Writing</p>
+      <h2 class="text-ink text-title mt-5 font-serif">{writing.heading}</h2>
 
-      <ul class="mt-14">
+      <ul class="mt-14 md:mt-16">
         {
           recentPosts.map((post) => (
             <PostRow
@@ -184,60 +181,54 @@ const { hero, profile, stack, projects, contact } = siteConfig.home;
         }
       </ul>
 
-      <a
-        href="/blog"
-        class="text-accent hover:text-accent-hover decoration-line-strong hover:decoration-accent mt-12 inline-block text-sm font-medium underline decoration-1 underline-offset-[6px] transition-colors"
-      >
-        All writing
-      </a>
+      <a href="/blog" class={`mt-12 inline-block ${linkClass}`}>All writing</a>
     </div>
   </section>
 
-  <!-- 05 — Contact -->
+  {/* 05 — Contact. Statement across the page, then a split. */}
   <section id="contact" aria-label="Contact me" class="border-line scroll-mt-20 border-t">
-    <div
-      class="mx-auto grid max-w-6xl gap-y-10 px-6 py-24 md:grid-cols-12 md:gap-x-10 md:px-10 md:py-32 lg:px-16"
-    >
-      <div class="md:col-span-3">
-        <h2 class="text-muted font-mono text-xs tracking-[0.14em] uppercase md:sticky md:top-24">
-          05 / {contact.label}
-        </h2>
-      </div>
+    <div class="mx-auto max-w-6xl px-6 py-32 md:px-10 md:py-48 lg:px-16">
+      <p class="meta text-muted">05 / {contact.label}</p>
 
-      <div class="reveal md:col-span-7 md:col-start-4">
-        <p class="text-ink text-headline font-serif">{contact.heading}</p>
-        <p class="text-ink-soft mt-8 max-w-[52ch] text-lg leading-[1.7]">{contact.description}</p>
+      <h2 class="reveal text-ink text-headline mt-8 max-w-[16ch] font-serif">
+        {contact.heading}
+      </h2>
 
-        <a
-          href={`mailto:${siteConfig.site.email}`}
-          class="text-accent hover:text-accent-hover decoration-line-strong hover:decoration-accent mt-10 inline-block font-serif text-3xl underline decoration-1 underline-offset-[8px] transition-colors md:text-4xl"
-        >
-          {siteConfig.site.email}
-        </a>
+      <div class="reveal mt-16 grid gap-y-12 md:mt-20 md:grid-cols-12 md:gap-x-10">
+        <p class="text-ink-soft text-body md:col-span-4">{contact.description}</p>
 
-        <nav
-          aria-label="Social links"
-          class="text-muted mt-14 flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs tracking-[0.14em] uppercase"
-        >
+        <div class="md:col-span-7 md:col-start-6">
           <a
-            href={siteConfig.site.social.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-ink transition-colors">GitHub</a
+            href={`mailto:${siteConfig.site.email}`}
+            class="text-accent hover:text-accent-hover decoration-line-strong hover:decoration-accent text-title font-serif underline decoration-1 underline-offset-[10px] transition-colors"
           >
-          <a
-            href={siteConfig.site.social.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-ink transition-colors">LinkedIn</a
+            {siteConfig.site.email}
+          </a>
+
+          <nav
+            aria-label="Social links"
+            class="meta text-muted mt-14 flex flex-wrap gap-x-8 gap-y-3"
           >
-          <a
-            href={siteConfig.site.social.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-ink transition-colors">Twitter</a
-          >
-        </nav>
+            <a
+              href={siteConfig.site.social.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-ink transition-colors">GitHub</a
+            >
+            <a
+              href={siteConfig.site.social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-ink transition-colors">LinkedIn</a
+            >
+            <a
+              href={siteConfig.site.social.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-ink transition-colors">Twitter</a
+            >
+          </nav>
+        </div>
       </div>
     </div>
   </section>

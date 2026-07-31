@@ -14,16 +14,32 @@
   --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* Fluid editorial type. Keeps the display sizes out of the markup. */
-  /* Lower bound is 2.5rem, not 3rem, so the longest hero line still fits a
-     375px viewport on one line instead of wrapping awkwardly. */
-  --text-display: clamp(2.5rem, 11vw, 8.5rem);
-  --text-display--line-height: 0.92;
-  --text-display--letter-spacing: -0.02em;
+  /* Fluid editorial type. Every size on the site is a token — no arbitrary
+     font sizes in markup. The scale is deliberately wide at both ends: 11px
+     meta against a 136px display is what makes the pages read as editorial.
+     The 8.5rem display cap is a content constraint, not taste — the longest
+     hero line is ~18 characters, which is about what fits `max-w-6xl` minus
+     gutters on one line. The 2.75rem floor keeps it on one line at 375px. */
+  --text-display: clamp(2.75rem, 12vw, 8.5rem);
+  --text-display--line-height: 0.86;
+  --text-display--letter-spacing: -0.03em;
 
-  --text-headline: clamp(2.25rem, 6vw, 4.5rem);
-  --text-headline--line-height: 1.02;
-  --text-headline--letter-spacing: -0.015em;
+  --text-headline: clamp(2.25rem, 6.5vw, 5rem);
+  --text-headline--line-height: 0.95;
+  --text-headline--letter-spacing: -0.02em;
+
+  /* Project titles, post titles, the contact email. */
+  --text-title: clamp(1.75rem, 3.4vw, 3rem);
+  --text-title--line-height: 1.05;
+  --text-title--letter-spacing: -0.015em;
+
+  /* Hero lede and post standfirsts. */
+  --text-lede: clamp(1.25rem, 1.9vw, 1.75rem);
+  --text-lede--line-height: 1.45;
+
+  /* Running body copy. */
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.75;
 
   --color-canvas: #fbfaf7;
   --color-surface: #f4f2ec;
@@ -79,6 +95,17 @@
 }
 :root.dark {
   color-scheme: dark;
+}
+
+/* Metadata lettering — section numerals, dates, tags, group labels, footer.
+   A utility rather than a repeated five-class string. Colour is deliberately
+   left out so it composes — but pair it with a text token (`meta text-muted`),
+   never with `line`/`line-strong`, which are rule colours and miss AA. */
+@utility meta {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }
 
 /* ── Base ─────────────────────────────────────────────────── */

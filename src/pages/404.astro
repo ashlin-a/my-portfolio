@@ -1,36 +1,33 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const linkClass =
+  'text-accent hover:text-accent-hover decoration-line-strong hover:decoration-accent text-sm font-medium underline decoration-1 underline-offset-[6px] transition-colors';
 ---
 
 <Layout title="404 — Page Not Found">
   <section
-    class="mx-auto flex min-h-[80vh] max-w-6xl flex-col justify-center px-6 md:px-10 lg:px-16"
+    class="mx-auto flex min-h-[calc(100svh-3.5rem)] max-w-6xl flex-col justify-center px-6 py-24 md:px-10 lg:px-16"
   >
-    <p class="enter text-muted font-mono text-xs tracking-[0.14em] uppercase" style="--i:0">
-      Error 404
-    </p>
+    <p class="enter meta text-muted" style="--i:0">Error 404</p>
 
-    <p class="enter text-line-strong text-display mt-8 font-serif select-none" style="--i:1">404</p>
+    <p class="enter text-line-strong text-display mt-6 font-serif select-none" style="--i:1">404</p>
 
-    <div class="enter border-line mt-8 border-t pt-8" style="--i:2">
-      <p class="text-ink max-w-[38ch] font-serif text-3xl md:text-4xl">This page doesn’t exist.</p>
-      <p class="text-ink-soft mt-6 max-w-[52ch] text-lg leading-[1.7]">
-        The address may be mistyped, or the page has moved since you last saw it.
-      </p>
+    <div
+      class="enter border-line mt-12 grid border-t pt-10 md:grid-cols-12 md:gap-x-10"
+      style="--i:2"
+    >
+      <h1 class="text-ink text-headline font-serif md:col-span-6">This page doesn’t exist.</h1>
 
-      <div class="mt-10 flex flex-wrap gap-x-8 gap-y-3">
-        <a
-          href="/"
-          class="text-accent hover:text-accent-hover decoration-line-strong hover:decoration-accent text-sm font-medium underline decoration-1 underline-offset-[6px] transition-colors"
-        >
-          Back to home
-        </a>
-        <a
-          href="/blog"
-          class="text-accent hover:text-accent-hover decoration-line-strong hover:decoration-accent text-sm font-medium underline decoration-1 underline-offset-[6px] transition-colors"
-        >
-          Read the writing
-        </a>
+      <div class="mt-8 md:col-span-4 md:col-start-9 md:mt-0">
+        <p class="text-ink-soft text-body">
+          The address may be mistyped, or the page has moved since you last saw it.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-x-6 gap-y-3">
+          <a href="/" class={linkClass}>Back to home</a>
+          <a href="/blog" class={linkClass}>Read the writing</a>
+        </div>
       </div>
     </div>
   </section>

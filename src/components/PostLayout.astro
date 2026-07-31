@@ -1,11 +1,12 @@
 ---
 interface Props {
   title: string;
+  description?: string;
   pubDate: Date;
   updatedDate?: Date;
 }
 
-const { title, pubDate, updatedDate } = Astro.props;
+const { title, description, pubDate, updatedDate } = Astro.props;
 
 const format = (date: Date) =>
   date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
@@ -13,17 +14,14 @@ const format = (date: Date) =>
 
 <article>
   <header class="border-line border-b">
-    <div class="mx-auto max-w-3xl px-6 pt-32 pb-16 md:px-10 md:pt-40">
-      <a
-        href="/blog"
-        class="text-muted hover:text-ink font-mono text-xs tracking-[0.14em] uppercase transition-colors"
-      >
-        ← Writing
-      </a>
+    <div class="mx-auto max-w-3xl px-6 pt-28 pb-14 md:px-10 md:pt-40">
+      <a href="/blog" class="meta text-muted hover:text-ink transition-colors"> ← Writing </a>
 
-      <h1 class="text-ink mt-8 font-serif text-4xl leading-[1.05] md:text-6xl">{title}</h1>
+      <h1 class="text-ink text-headline mt-8 font-serif">{title}</h1>
 
-      <p class="text-muted mt-8 font-mono text-xs tracking-[0.14em] uppercase">
+      {description && <p class="text-ink-soft text-lede mt-8">{description}</p>}
+
+      <p class="meta text-muted mt-10">
         <time datetime={pubDate.toISOString()}>{format(pubDate)}</time>
         {
           updatedDate && (
